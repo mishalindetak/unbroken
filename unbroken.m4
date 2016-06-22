@@ -37,6 +37,9 @@ BOOL(`Use navbar', `0')
 BOOL(`Use sidebar', `1')
 BOOL(`Use portrait', `0')
 BOOL(`Use portrait caption', `0')
+BOOL(`White buttons', `0')
+BOOL(`Grey buttons', `1')
+BOOL(`Black buttons', `0')
 
 <meta name="select:Navbar" content="default" title="Default">
 <meta name="select:Navbar" content="inverse" title="Alternative">
@@ -58,6 +61,7 @@ FONT(`Body', `Arial, Helvetica, sans-serif')
 
 <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/{select:Bootswatch}/bootstrap.min.css" integrity="{select:BSIntegrity}" rel="stylesheet" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.css" integrity="sha384-EsoR0pjPTZTUy5b8kJf6aTfA7quYluD5mNQ/Lz4hsxU2kXuuc6PlXVfBJCFdTXqD" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -92,10 +96,19 @@ bottom: 0;
 }
 {/block:ShowTitle}
 .post .img-responsive { margin: 0 auto; }
+.reblog_button, .like_button { display: inline-block !important; }
 {CustomCSS}
 </style>
 </head>
 <body>
+
+define(`NAVITEMS',
+`{block:HasPages}{block:Pages}<li><a href="{URL}"><span class="fa fa-bookmark" aria-hidden="true"></span> {Label}</a></li>{/block:Pages}{/block:HasPages}
+{block:SubmissionsEnabled}<li><a href="{BlogURL}submit"><span class="fa fa-cloud-upload" aria-hidden="true"></span> {SubmitLabel}</a></li>{/block:SubmissionsEnabled}
+{block:AskEnabled}<li><a href="{BlogURL}ask"><span class="fa fa-envelope" aria-hidden="true"></span> {AskLabel}</a></li>{/block:AskEnabled}
+{text:Extra nav items}
+<li><a href="{RSS}"><span class="fa fa-rss" aria-hidden="true"></span> RSS</a></li>
+')
 
 {block:IfUseNavbar}
 <nav class="navbar navbar-{select:Navbar} navbar-static-top">
@@ -111,10 +124,7 @@ bottom: 0;
 </div>
 <div class="collapse navbar-collapse" id="thenavbar">
 <ul class="nav navbar-nav">
-{block:HasPages}{block:Pages}<li><a href="{URL}">{Label}</a></li>{/block:Pages}{/block:HasPages}
-{block:SubmissionsEnabled}<li><a href="{BlogURL}submit">{SubmitLabel}</a></li>{/block:SubmissionsEnabled}
-{block:AskEnabled}<li><a href="{BlogURL}ask">{AskLabel}</a></li>{/block:AskEnabled}
-{text:Extra nav items}
+NAVITEMS
 </ul>
 <form class="navbar-form navbar-right" role="search" action="{BlogURL}search" method="get">
 <div class="form-group">
@@ -141,13 +151,10 @@ bottom: 0;
 {/block:IndexPage}
 
 <div class="container-fluid">
-<div class="row">
-{block:IfUseSidebar}<div class="col-md-9">{/block:IfUseSidebar}
+{block:IfUseSidebar}<div class="row"><div class="col-md-10">{/block:IfUseSidebar}
 
 {block:Posts}
 
-dnl TODO: add permalink, like, reblog
-dnl TODO: add an argument for extra buttons (maybe use col-xs to put things side by side?)
 define(`DATE',
 `<div class="col-md-2 text-right">
 {block:Date}{block:NewDayDate}
@@ -157,26 +164,51 @@ define(`DATE',
 </div>
 ')
 
+define(`BUTTONS',
+`<div class="col-md-2">
+{block:Date}
+{block:HasTags}
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
+{/block:HasTags}
+{block:NoteCount}
+<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
+{/block:NoteCount}
+$1
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+{block:ifWhiteButtons}
+{LikeButton size="15" color="white"}
+{ReblogButton size="15" color="white"}
+{/block:ifWhiteButtons}
+{block:ifGreyButtons}
+{LikeButton size="15" color="grey"}
+{ReblogButton size="15" color="grey"}
+{/block:ifGreyButtons}
+{block:ifBlackButtons}
+{LikeButton size="15" color="black"}
+{ReblogButton size="15" color="black"}
+{/block:ifBlackButtons}
+{/block:Date}
+</div>')
+
 define(`TITLE',
 `ifelse($1,,
-  `{block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}',
-  `<div class="panel-heading"><h3 class="panel-title">$1</h3></div>')')
+`{block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}',
+`<div class="panel-heading"><h3 class="panel-title">$1</h3></div>')')
 
 define(`POST',
 `{block:$1}
+<div class="row">
 DATE
-<div class="col-md-10 post">
+<div class="col-md-8 post">
 <div class="panel panel-default">
 TITLE($2)
 <div class="panel-body">
 $3
 </div>
-{block:HasTags}
-<div class="panel-footer">
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
 </div>
-{/block:HasTags}
+{block:PostNotes}<div id="notes">{PostNotes}</div>{/block:PostNotes}
 </div>
+BUTTONS($4)
 </div>
 {/block:$1}')
 
@@ -184,7 +216,8 @@ define(`PIC',
 `POST($1,
 ,
 `$2<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">$3
-{block:Caption}<div class="text-center"><br>{Caption}</div>{/block:Caption}')')
+{block:Caption}<div class="text-center"><br>{Caption}</div>{/block:Caption}',
+`<a href="{PhotoUrl-HighRes}"><span class="fa fa-save" aria-hidden="true"></span><span class="sr-only">save</span></a>')')
 
 PIC(Photo,
 `<a href="{PhotoURL-HighRes}" data-toggle="lightbox">',
@@ -201,18 +234,21 @@ POST(Photoset,
 <a  href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>
 </div>
 {/block:Photos}
-{block:Caption}<div class="col-md-12 text-center"><p>{Caption}</p></div>{/block:Caption}')
+{block:Caption}<div class="col-md-12 text-center"><p>{Caption}</p></div>{/block:Caption}',
+)
 
 POST(Text,
 ,
-`{Body}')
+`{Body}',
+)
 
 POST(Quote,
 ,
 `<blockquote>
 <p>{Quote}</p>
 {block:Source}<footer>{Source}</footer>{/block:Source}
-</blockquote>')
+</blockquote>',
+)
 
 POST(Link,
 `<a href="{URL}" {Target}>{block:Author}{Author}: {/block:Author}{Name}</a>',
@@ -222,20 +258,23 @@ POST(Link,
 <p>{Excerpt}</p>
 </blockquote>
 {/block:Excerpt}
-{block:Description}{Description}{/block:Description}')
+{block:Description}{Description}{/block:Description}',
+)
 
 POST(Chat,
 ,
 `{block:Lines}
 {block:Label}<b>{Label}</b>{/block:Label} {Line}<br>
-{/block:Lines}')
+{/block:Lines}',
+)
 
 POST(Video,
 ,
 `<div class="text-center">
 {Video-500}
-{block:Caption}<br>{Caption}{/block:Caption}
-</div>')
+{block:Caption}<p><br>{Caption}</p>{/block:Caption}
+</div>',
+)
 
 POST(Audio,
 `{block:Artist}{Artist}{block:TrackName}: {/block:TrackName}{/block:Artist}{block:TrackName}{TrackName}{/block:TrackName}',
@@ -243,8 +282,9 @@ POST(Audio,
 {block:AlbumArt}<img class="img-responsive" src="{AlbumArtURL}">{/block:AlbumArt}
 {block:AudioEmbed}{AudioEmbed-500}{/block:AudioEmbed}
 {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
-{block:Caption}<br>{Caption}{/block:Caption}
-</div>')
+{block:Caption}<p><br>{Caption}</p>{/block:Caption}
+</div>',
+`{block:ExternalAudio}<a href="{ExternalAudioURL}"><span class="fa fa-save" aria-hidden="true"></span><span class="sr-only">save</span></a>{/block:ExternalAudio}')
 
 POST(Answer,
 ,
@@ -267,7 +307,7 @@ POST(Answer,
 {block:ifUseSidebar}
 </div>
 
-<div class="col-md-3">
+<div class="col-md-2">
 
 {block:ifUsePortrait}
 <div class="thumbnail">
@@ -303,18 +343,15 @@ POST(Answer,
 </div>
 
 <ul class="nav nav-pills nav-stacked">
-<li><a href="{BlogURL}">Home</a></li>
-{block:HasPages}{block:Pages}<li><a href="{URL}">{Label}</a></li>{/block:Pages}{/block:HasPages}
-{block:SubmissionsEnabled}<li><a href="{BlogURL}submit">{SubmitLabel}</a></li>{/block:SubmissionsEnabled}
-{block:AskEnabled}<li><a href="{BlogURL}ask">{AskLabel}</a></li>{/block:AskEnabled}
-{text:Extra nav items}
+<li><a href="{BlogURL}"><span class="fa fa-home" aria-hidden="true"></span> Home</a></li>
+NAVITEMS
 </ul>
 {/block:IfNotUseNavbar}
 
 </div>
+</div>
 {/block:ifUseSidebar}
 
-</div>
 <div class="row">
 <div class="col-md-12">
 <nav>
