@@ -97,6 +97,11 @@ bottom: 0;
 {/block:ShowTitle}
 .post .img-responsive { margin: 0 auto; }
 .reblog_button, .like_button { display: inline-block !important; }
+.metainfo { margin-bottom: 3em; }
+#vnav { margin-bottom: 1.5em; }
+@media (max-width: 991px) {
+#searchpager { display: none; }
+}
 {CustomCSS}
 </style>
 </head>
@@ -164,29 +169,32 @@ define(`DATE',
 </div>
 ')
 
+define(`BSIZE', `14')
+
+dnl figuring out how to capitalize (or if we even need to) is more effort than it's worth
+define(`BCOLOR',
+`{block:if$1Buttons}
+{LikeButton size="BSIZE" color="$2"}
+{ReblogButton size="BSIZE" color="$2"}
+{/block:if$1Buttons}')
+
 define(`BUTTONS',
 `<div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-$1
+<div class="metainfo">
+BCOLOR(`White',`white')
+BCOLOR(`Grey',`grey')
+BCOLOR(`Black',`black')
 <a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
-{block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
-{/block:ifWhiteButtons}
-{block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
-{/block:ifGreyButtons}
-{block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
-{/block:ifBlackButtons}
+$1<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>')
 
@@ -322,6 +330,11 @@ POST(Answer,
 {/block:ifUsePortrait}
 
 {block:IfNotUseNavbar}
+<ul class="nav nav-pills nav-stacked" id="vnav">
+<li><a href="{BlogURL}"><span class="fa fa-home" aria-hidden="true"></span> Home</a></li>
+NAVITEMS
+</ul>
+
 <div class="panel panel-default">
 <div class="panel-body">
 <form action="{BlogURL}search" method="get" role="search">
@@ -332,6 +345,7 @@ POST(Answer,
 </span>
 </div>
 </form>
+<div id="searchpager">
 <nav>
 <ul class="pager">
 {block:PreviousPage}<li><a href="{PreviousPage}">Previous</a></li>{/block:PreviousPage}
@@ -341,11 +355,7 @@ POST(Answer,
 <p class="text-center">Page {CurrentPage} of {TotalPages}</p>
 </div>
 </div>
-
-<ul class="nav nav-pills nav-stacked">
-<li><a href="{BlogURL}"><span class="fa fa-home" aria-hidden="true"></span> Home</a></li>
-NAVITEMS
-</ul>
+</div>
 {/block:IfNotUseNavbar}
 
 </div>
@@ -361,9 +371,9 @@ NAVITEMS
 </ul>
 </nav>
 </div>
-<div class="col-md-4">&copy; {CopyrightYears} {Title}</div>
-<div class="col-md-4"><p class="text-center">Page {CurrentPage} of {TotalPages}</p></div>
-<div class="col-md-4"><p class="text-right">Theme: <a href="https://github.com/mishalindetak/unbroken">Unbroken</a>, by <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a></p></div>
+<div class="col-md-4 col-xs-4">&copy; {CopyrightYears} {Title}</div>
+<div class="col-md-4 col-xs-4"><p class="text-center">Page {CurrentPage} of {TotalPages}</p></div>
+<div class="col-md-4 col-xs-4"><p class="text-right">Theme: <a href="https://github.com/mishalindetak/unbroken">Unbroken</a>, by <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a></p></div>
 </div>
 </div>
 </div>

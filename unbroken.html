@@ -95,6 +95,11 @@ bottom: 0;
 {/block:ShowTitle}
 .post .img-responsive { margin: 0 auto; }
 .reblog_button, .like_button { display: inline-block !important; }
+.metainfo { margin-bottom: 3em; }
+#vnav { margin-bottom: 1.5em; }
+@media (max-width: 991px) {
+#searchpager { display: none; }
+}
 {CustomCSS}
 </style>
 </head>
@@ -164,26 +169,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{PhotoUrl-HighRes}"><span class="fa fa-save" aria-hidden="true"></span><span class="sr-only">save</span></a>
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<a href="{PhotoUrl-HighRes}"><span class="fa fa-save" aria-hidden="true"></span><span class="sr-only">save</span></a><br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -208,26 +216,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{PhotoUrl-HighRes}"><span class="fa fa-save" aria-hidden="true"></span><span class="sr-only">save</span></a>
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<a href="{PhotoUrl-HighRes}"><span class="fa fa-save" aria-hidden="true"></span><span class="sr-only">save</span></a><br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -256,25 +267,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -298,25 +313,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -343,25 +362,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -391,25 +414,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -435,25 +462,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -480,25 +511,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -527,26 +562,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-{block:ExternalAudio}<a href="{ExternalAudioURL}"><span class="fa fa-save" aria-hidden="true"></span><span class="sr-only">save</span></a>{/block:ExternalAudio}
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+{block:ExternalAudio}<a href="{ExternalAudioURL}"><span class="fa fa-save" aria-hidden="true"></span><span class="sr-only">save</span></a>{/block:ExternalAudio}<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -582,25 +620,29 @@ bottom: 0;
 </div>
 <div class="col-md-2">
 {block:Date}
-{block:HasTags}
-<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small><br>
-{/block:HasTags}
-{block:NoteCount}
-<small><a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a></small><br>
-{/block:NoteCount}
-<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<div class="metainfo">
 {block:ifWhiteButtons}
-{LikeButton size="15" color="white"}
-{ReblogButton size="15" color="white"}
+{LikeButton size="14" color="white"}
+{ReblogButton size="14" color="white"}
 {/block:ifWhiteButtons}
 {block:ifGreyButtons}
-{LikeButton size="15" color="grey"}
-{ReblogButton size="15" color="grey"}
+{LikeButton size="14" color="grey"}
+{ReblogButton size="14" color="grey"}
 {/block:ifGreyButtons}
 {block:ifBlackButtons}
-{LikeButton size="15" color="black"}
-{ReblogButton size="15" color="black"}
+{LikeButton size="14" color="black"}
+{ReblogButton size="14" color="black"}
 {/block:ifBlackButtons}
+<a href="{Permalink}"><span class="fa fa-link" aria-hidden="true"></span><span class="sr-only">permalink</span></a>
+<br>
+{block:NoteCount}
+<a href="{Permalink}#notes"><span class="fa fa-comments-o" aria-hidden="true"></span> {NoteCountWithLabel}</a><br>
+{/block:NoteCount}
+{block:HasTags}
+<span class="fa fa-tags" aria-hidden="true">
+<small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>
+{/block:HasTags}
+</div>
 {/block:Date}
 </div>
 </div>
@@ -621,6 +663,14 @@ bottom: 0;
 </div>
 {/block:ifUsePortrait}
 {block:IfNotUseNavbar}
+<ul class="nav nav-pills nav-stacked" id="vnav">
+<li><a href="{BlogURL}"><span class="fa fa-home" aria-hidden="true"></span> Home</a></li>
+{block:HasPages}{block:Pages}<li><a href="{URL}"><span class="fa fa-bookmark" aria-hidden="true"></span> {Label}</a></li>{/block:Pages}{/block:HasPages}
+{block:SubmissionsEnabled}<li><a href="{BlogURL}submit"><span class="fa fa-cloud-upload" aria-hidden="true"></span> {SubmitLabel}</a></li>{/block:SubmissionsEnabled}
+{block:AskEnabled}<li><a href="{BlogURL}ask"><span class="fa fa-envelope" aria-hidden="true"></span> {AskLabel}</a></li>{/block:AskEnabled}
+{text:Extra nav items}
+<li><a href="{RSS}"><span class="fa fa-rss" aria-hidden="true"></span> RSS</a></li>
+</ul>
 <div class="panel panel-default">
 <div class="panel-body">
 <form action="{BlogURL}search" method="get" role="search">
@@ -631,6 +681,7 @@ bottom: 0;
 </span>
 </div>
 </form>
+<div id="searchpager">
 <nav>
 <ul class="pager">
 {block:PreviousPage}<li><a href="{PreviousPage}">Previous</a></li>{/block:PreviousPage}
@@ -640,14 +691,7 @@ bottom: 0;
 <p class="text-center">Page {CurrentPage} of {TotalPages}</p>
 </div>
 </div>
-<ul class="nav nav-pills nav-stacked">
-<li><a href="{BlogURL}"><span class="fa fa-home" aria-hidden="true"></span> Home</a></li>
-{block:HasPages}{block:Pages}<li><a href="{URL}"><span class="fa fa-bookmark" aria-hidden="true"></span> {Label}</a></li>{/block:Pages}{/block:HasPages}
-{block:SubmissionsEnabled}<li><a href="{BlogURL}submit"><span class="fa fa-cloud-upload" aria-hidden="true"></span> {SubmitLabel}</a></li>{/block:SubmissionsEnabled}
-{block:AskEnabled}<li><a href="{BlogURL}ask"><span class="fa fa-envelope" aria-hidden="true"></span> {AskLabel}</a></li>{/block:AskEnabled}
-{text:Extra nav items}
-<li><a href="{RSS}"><span class="fa fa-rss" aria-hidden="true"></span> RSS</a></li>
-</ul>
+</div>
 {/block:IfNotUseNavbar}
 </div>
 </div>
@@ -661,9 +705,9 @@ bottom: 0;
 </ul>
 </nav>
 </div>
-<div class="col-md-4">&copy; {CopyrightYears} {Title}</div>
-<div class="col-md-4"><p class="text-center">Page {CurrentPage} of {TotalPages}</p></div>
-<div class="col-md-4"><p class="text-right">Theme: <a href="https://github.com/mishalindetak/unbroken">Unbroken</a>, by <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a></p></div>
+<div class="col-md-4 col-xs-4">&copy; {CopyrightYears} {Title}</div>
+<div class="col-md-4 col-xs-4"><p class="text-center">Page {CurrentPage} of {TotalPages}</p></div>
+<div class="col-md-4 col-xs-4"><p class="text-right">Theme: <a href="https://github.com/mishalindetak/unbroken">Unbroken</a>, by <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a></p></div>
 </div>
 </div>
 </div>
