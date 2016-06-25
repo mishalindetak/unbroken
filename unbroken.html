@@ -105,16 +105,14 @@ body {
 {/block:Date}
 </div>
 <div class="col-md-8 post"> <div class="panel panel-default"> {block:Photo} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body"><a href="{PhotoURL-HighRes}" data-toggle="lightbox">{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}</a>
-{block:Caption}<div class="text-center"><br>{Caption}</div>{/block:Caption}</div>{/block:Photo}
+<div class="panel-body"><div class="text-center"><a href="{PhotoURL-HighRes}" data-toggle="lightbox">{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}</a></div>
+{block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Photo}
 {block:Panorama} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body">{LinkOpenTag}{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}{LinkCloseTag}
-{block:Caption}<div class="text-center"><br>{Caption}</div>{/block:Caption}</div>{/block:Panorama}
+<div class="panel-body"><div class="text-center">{LinkOpenTag}{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}{LinkCloseTag}</div>
+{block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Panorama}
 {block:Photoset} <div class="panel-heading"><h3 class="panel-title">{PhotoCount} Photos</h3></div>
-<div class="panel-body">{block:Photos} <div class="col-md-6"> <a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>
-</div>
-{/block:Photos}
-{block:Caption}<div class="col-md-12 text-center"><p>{Caption}</p></div>{/block:Caption}
+<div class="panel-body"><div class="text-center">{block:Photos}{block:ifNotFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>{/block:ifFullSizeImages}<br>{/block:Photos}</div>
+{block:Caption}<p>{Caption}</p>{/block:Caption}
 </div>{/block:Photoset}
 {block:Text} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body">{Body}</div>{/block:Text}
@@ -128,13 +126,12 @@ body {
 {block:Chat} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body">{block:Lines}{block:Label}<b>{Label}</b>{/block:Label} {Line}<br>{/block:Lines}</div>{/block:Chat}
 {block:Video} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body"><div class="text-center">{Video-500}{block:Caption}<p><br>{Caption}</p>{/block:Caption}</div></div>{/block:Video}
+<div class="panel-body">{Video-500}{block:Caption}<p><br>{Caption}</p>{/block:Caption}</div>{/block:Video}
 {block:Audio} <div class="panel-heading"><h3 class="panel-title">{block:Artist}{Artist}{block:TrackName}: {/block:TrackName}{/block:Artist}{block:TrackName}{TrackName}{/block:TrackName}</h3></div>
-<div class="panel-body"><div class="text-center"> {block:AlbumArt}<img class="img-responsive" src="{AlbumArtURL}">{/block:AlbumArt}
+<div class="panel-body">{block:AlbumArt}<img class="img-responsive" src="{AlbumArtURL}">{/block:AlbumArt}
 {block:AudioEmbed}{AudioEmbed-500}{/block:AudioEmbed}
 {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
 {block:Caption}<p><br>{Caption}</p>{/block:Caption}
-</div>
 </div>{/block:Audio}
 {block:Answer} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body"><div class="text-right">{Asker} asked: <blockquote class="blockquote-reverse"><p>{Question}</p></blockquote></div>

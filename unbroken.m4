@@ -157,8 +157,8 @@ define(`POST',`BLOCK(`$1',`TITLE($2)DIV(`panel-body',$3)')')
 
 define(`PIC',
 ` POST($1,,
-  ` $2BLOCK(`ifNotFullSizeImages',`<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">')BLOCK(`ifFullSizeImages',`<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">')$3
-    BLOCK(`Caption', `DIV(`text-center', `<br>{Caption}')')',
+  ` DIV(`text-center', `$2BLOCK(`ifNotFullSizeImages',`<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">')BLOCK(`ifFullSizeImages',`<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">')$3')
+    BLOCK(`Caption', `<br>{Caption}')',
   ` <a href="{PhotoUrl-HighRes}">FA(`save')<span class="sr-only">save</span></a>
   ')
 ')
@@ -171,13 +171,8 @@ define(`CONTENT',
       ` DIV(`panel panel-default',
         ` PIC(`Photo', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox">', `</a>')
           PIC(`Panorama', `{LinkOpenTag}', `{LinkCloseTag}')
-          POST(`Photoset',` {PhotoCount} Photos',
-          ` BLOCK(`Photos',
-            ` DIV(`col-md-6',
-              ` <a  href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>
-              ')
-            ')
-            BLOCK(`Caption', `DIV(`col-md-12 text-center',`<p>{Caption}</p>')')
+          POST(`Photoset',` {PhotoCount} Photos', `DIV(`text-center', `BLOCK(`Photos', `BLOCK(`ifNotFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>')BLOCK(`ifFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>')<br>')')
+            BLOCK(`Caption', `<p>{Caption}</p>')
           ')
           POST(`Text',,`{Body}')
           POST(`Quote',,`<blockquote><p>{Quote}</p>BLOCK(`Source',`<footer>{Source}</footer>')</blockquote>')
@@ -187,14 +182,12 @@ define(`CONTENT',
             BLOCK(`Description', `{Description}')
           ')
           POST(`Chat',,`BLOCK(`Lines', `BLOCK(`Label', `<b>{Label}</b>') {Line}<br>')',)
-          POST(`Video',,`DIV(`text-center',`{Video-500}BLOCK(`Caption',`<p><br>{Caption}</p>')')',)
+          POST(`Video',,`{Video-500}BLOCK(`Caption',`<p><br>{Caption}</p>')',)
           POST(`Audio',` BLOCK(`Artist', `{Artist}BLOCK(`TrackName', `: ')')BLOCK(`TrackName', `{TrackName}')',
-          ` DIV(`text-center',
-            ` BLOCK(`AlbumArt', `<img class="img-responsive" src="{AlbumArtURL}">')
-              BLOCK(`AudioEmbed', `{AudioEmbed-500}')
-              BLOCK(`AudioPlayer', `{AudioPlayer}')
-              BLOCK(`Caption', `<p><br>{Caption}</p>')
-            ')
+          ` BLOCK(`AlbumArt', `<img class="img-responsive" src="{AlbumArtURL}">')
+            BLOCK(`AudioEmbed', `{AudioEmbed-500}')
+            BLOCK(`AudioPlayer', `{AudioPlayer}')
+            BLOCK(`Caption', `<p><br>{Caption}</p>')
           ')
           POST(`Answer',,
           ` DIV(`text-right',`{Asker} asked: <blockquote class="blockquote-reverse"><p>{Question}</p></blockquote>')
