@@ -89,6 +89,8 @@ body {
 .reblog_button, .like_button { display: inline-block !important; margin-top: 0; margin-bottom: 0; }
 .date { text-align: left; }
 }
+blockquote { font-size: inherit; }
+.Quote blockquote { font-size: 1.5em; }
 {CustomCSS}
 </style>
 </head>
@@ -105,36 +107,36 @@ body {
 {/block:Date}
 </div>
 <div class="col-md-8 post"> <div class="panel panel-default"> {block:Photo} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body"><div class="text-center"><a href="{PhotoURL-HighRes}" data-toggle="lightbox">{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}</a></div>
+<div class="panel-body Photo"><div class="text-center"><a href="{PhotoURL-HighRes}" data-toggle="lightbox">{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}</a></div>
 {block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Photo}
 {block:Panorama} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body"><div class="text-center">{LinkOpenTag}{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}{LinkCloseTag}</div>
+<div class="panel-body Panorama"><div class="text-center">{LinkOpenTag}{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}{LinkCloseTag}</div>
 {block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Panorama}
 {block:Photoset} <div class="panel-heading"><h3 class="panel-title">{PhotoCount} Photos</h3></div>
-<div class="panel-body"><div class="text-center">{block:Photos}{block:ifNotFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>{/block:ifFullSizeImages}<br>{/block:Photos}</div>
+<div class="panel-body Photoset"><div class="text-center">{block:Photos}{block:ifNotFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>{/block:ifFullSizeImages}<br>{/block:Photos}</div>
 {block:Caption}<p>{Caption}</p>{/block:Caption}
 </div>{/block:Photoset}
 {block:Text} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body">{Body}</div>{/block:Text}
+<div class="panel-body Text">{Body}</div>{/block:Text}
 {block:Quote} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body"><blockquote><p>{Quote}</p>{block:Source}<footer>{Source}</footer>{/block:Source}</blockquote></div>{/block:Quote}
+<div class="panel-body Quote"><blockquote><p>{Quote}</p>{block:Source}<footer>{Source}</footer>{/block:Source}</blockquote></div>{/block:Quote}
 {block:Link} <div class="panel-heading"><h3 class="panel-title"><a href="{URL}" {Target}><u>{block:Author}{Author}: {/block:Author}{Name}</u></a></h3></div>
-<div class="panel-body">{block:Thumbnail}<img class="img-responsive" src="{Thumbnail}">{/block:Thumbnail}
+<div class="panel-body Link">{block:Thumbnail}<img class="img-responsive" src="{Thumbnail}">{/block:Thumbnail}
 {block:Excerpt}<blockquote><p>{Excerpt}</p></blockquote>{/block:Excerpt}
 {block:Description}{Description}{/block:Description}
 </div>{/block:Link}
 {block:Chat} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body">{block:Lines}{block:Label}<b>{Label}</b>{/block:Label} {Line}<br>{/block:Lines}</div>{/block:Chat}
+<div class="panel-body Chat">{block:Lines}{block:Label}<b>{Label}</b>{/block:Label} {Line}<br>{/block:Lines}</div>{/block:Chat}
 {block:Video} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body">{Video-500}{block:Caption}<p><br>{Caption}</p>{/block:Caption}</div>{/block:Video}
+<div class="panel-body Video">{Video-500}{block:Caption}<p><br>{Caption}</p>{/block:Caption}</div>{/block:Video}
 {block:Audio} <div class="panel-heading"><h3 class="panel-title">{block:Artist}{Artist}{block:TrackName}: {/block:TrackName}{/block:Artist}{block:TrackName}{TrackName}{/block:TrackName}</h3></div>
-<div class="panel-body">{block:AlbumArt}<img class="img-responsive" src="{AlbumArtURL}">{/block:AlbumArt}
+<div class="panel-body Audio">{block:AlbumArt}<img class="img-responsive" src="{AlbumArtURL}">{/block:AlbumArt}
 {block:AudioEmbed}{AudioEmbed-500}{/block:AudioEmbed}
 {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
 {block:Caption}<p><br>{Caption}</p>{/block:Caption}
 </div>{/block:Audio}
 {block:Answer} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body"><div class="text-right">{Asker} asked: <blockquote class="blockquote-reverse"><p>{Question}</p></blockquote></div>
+<div class="panel-body Answer"><div class="text-right">{Asker} asked: <blockquote class="blockquote-reverse"><p>{Question}</p></blockquote></div>
 {block:Answerer}{Answerer} replied: <blockquote>{Answer}</blockquote>{/block:Answerer}
 {Replies}
 </div>{/block:Answer}

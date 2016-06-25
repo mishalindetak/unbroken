@@ -106,6 +106,10 @@ BLOCK(`ShowTitle',
 .reblog_button, .like_button { display: inline-block !important; margin-top: 0; margin-bottom: 0; }
 .date { text-align: left; }
 }
+
+blockquote { font-size: inherit; }
+.Quote blockquote { font-size: 1.5em; }
+
 {CustomCSS}
 </style>
 
@@ -153,7 +157,7 @@ define(`TITLE',
   )
 ')
 
-define(`POST',`BLOCK(`$1',`TITLE($2)DIV(`panel-body',$3)')')
+define(`POST',`BLOCK(`$1',`TITLE($2)DIV(`panel-body $1',$3)')')
 
 define(`PIC',
 ` POST($1,,
