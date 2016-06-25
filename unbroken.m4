@@ -10,9 +10,6 @@ dnl Bootstrap documentation says the above three meta tags MUST be before anythi
 
 define(`SELECT', `<meta name="select:$1" content="$2" title="$3">')
 
-SELECT(`Navbar', `default', `Default')
-SELECT(`Navbar', `inverse', `Alternative')
-
 define(`BS',
 ` SELECT(`Bootswatch',$1,$1)
   SELECT(`BSIntegrity',$2,$1)
@@ -40,9 +37,6 @@ define(`BOOL',`<meta name="if:$1" content="$2">')
 BOOL(`Change title color',	`0')
 BOOL(`Change title font',	`0')
 BOOL(`Change body font',	`0')
-BOOL(`Move controls to bottom',	`0')
-BOOL(`Use navbar',		`0')
-BOOL(`Use sidebar',		`1')
 BOOL(`Use portrait',		`0')
 BOOL(`Use portrait caption',	`0')
 BOOL(`White buttons',		`0')
@@ -86,15 +80,11 @@ STYLE(`https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.c
 ---
 body {
 BLOCK(`IfChangeBodyFont', `font-family: {font:Body};')
-BLOCK(`IfNotUseNavbar',
-` BLOCK(`HideTitle', `padding-top: 2em;')
-  BLOCK(`ShowTitle', `BLOCK(`PermalinkPage', `padding-top: 2em;')')
-')
+BLOCK(`HideTitle', `padding-top: 2em;')
+BLOCK(`ShowTitle', `BLOCK(`PermalinkPage', `padding-top: 2em;')')
 }
 
 BLOCK(`IfChangeTitleFont', `h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: {font:Title}; }')
-
-BLOCK(`IfMoveControlsToBottom', `#tumblr_controls, .tmblr-iframe.tmblr-iframe--desktop-logged-in-controls.iframe-controls--desktop, .tmblr-iframe.tmblr-iframe--controls.iframe-controls--desktop { top: auto; bottom: 0; }')
 
 BLOCK(`ShowTitle',
 ` .header {
@@ -126,40 +116,6 @@ dnl obviously this can't replace divs that have ids
 define(`DIV', `<div class="$1">$2</div>')
 
 define(`FA', `<span class="fa fa-$1" aria-hidden="true"></span>')
-
-define(`NAVITEMS',
-` <li><a href="{BlogURL}archive">FA(`calendar') Archive</a></li>
-  BLOCK(`HasPages', `BLOCK(`Pages', `<li><a href="{URL}">FA(`bookmark') {Label}</a></li>')')
-  {text:Extra nav items}
-  BLOCK(`SubmissionsEnabled', `<li><a href="{BlogURL}submit">FA(`pencil') {SubmitLabel}</a></li>')
-  BLOCK(`AskEnabled', `<li><a href="{BlogURL}ask">FA(`envelope') {AskLabel}</a></li>')
-  <li><a href="{RSS}">FA(`rss') RSS</a></li>
-')
-
-BLOCK(`IfUseNavbar',
-` <nav class="navbar navbar-{select:Navbar} navbar-static-top">
-  DIV(`container-fluid',
-  ` DIV(`navbar-header',
-    ` <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#thenavbar" aria-expanded="false">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{BlogURL}">{Title}</a>
-    ')
-    <div class="collapse navbar-collapse" id="thenavbar">
-      <ul class="nav navbar-nav">
-      NAVITEMS
-      </ul>
-      <form class="navbar-form navbar-right" role="search" action="{BlogURL}search" method="get">
-      DIV(`form-group', `<input type="text" class="form-control" placeholder="Search" title="Search" name="q" value="{SearchQuery}">')
-      <button type="submit" class="btn btn-default">FA(`search')<span class="sr-only">Submit</span></button>
-      </form>
-    </div>
-  ')
-  </nav>
-')
 
 define(`JUMBOTRON',
 ` BLOCK(`IndexPage',
@@ -282,28 +238,30 @@ define(`PORTRAIT',
 ')
 
 define(`SIDENAV',
-` BLOCK(`IfNotUseNavbar',
-  `
-    <ul class="nav nav-pills nav-stacked" id="vnav">
-    <li><a href="{BlogURL}">FA(`home') Home</a></li>
-    NAVITEMS
-    </ul>
+` <ul class="nav nav-pills nav-stacked" id="vnav">
+  <li><a href="{BlogURL}">FA(`home') Home</a></li>
+  <li><a href="{BlogURL}archive">FA(`calendar') Archive</a></li>
+  BLOCK(`HasPages', `BLOCK(`Pages', `<li><a href="{URL}">FA(`bookmark') {Label}</a></li>')')
+  {text:Extra nav items}
+  BLOCK(`SubmissionsEnabled', `<li><a href="{BlogURL}submit">FA(`pencil') {SubmitLabel}</a></li>')
+  BLOCK(`AskEnabled', `<li><a href="{BlogURL}ask">FA(`envelope') {AskLabel}</a></li>')
+  <li><a href="{RSS}">FA(`rss') RSS</a></li>
+  </ul>
 
-    DIV(`panel panel-default',
-    ` DIV(`panel-body',
-      ` <form action="{BlogURL}search" method="get" role="search">
-        DIV(`input-group',
-        ` <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
-          <span class="input-group-btn"><button class="btn btn-default" type="submit">FA(`search')<span class="sr-only">Submit</span></button></span>
-        ')
-        </form>
-        DIV(`searchpager',
-        ` <nav><ul class="pager">
-          BLOCK(`PreviousPage',`<li><a href="{PreviousPage}">Previous</a></li>')
-          BLOCK(`NextPage',`<li><a href="{NextPage}">Next</a></li>')
-          </ul></nav>
-          <p class="text-center">Page {CurrentPage} of {TotalPages}</p>
-        ')
+  DIV(`panel panel-default',
+  ` DIV(`panel-body',
+    ` <form action="{BlogURL}search" method="get" role="search">
+      DIV(`input-group',
+      ` <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
+        <span class="input-group-btn"><button class="btn btn-default" type="submit">FA(`search')<span class="sr-only">Submit</span></button></span>
+      ')
+      </form>
+      DIV(`searchpager',
+      ` <nav><ul class="pager">
+        BLOCK(`PreviousPage',`<li><a href="{PreviousPage}">Previous</a></li>')
+        BLOCK(`NextPage',`<li><a href="{NextPage}">Next</a></li>')
+        </ul></nav>
+        <p class="text-center">Page {CurrentPage} of {TotalPages}</p>
       ')
     ')
   ')
@@ -314,19 +272,9 @@ dnl actual page starts here
 JUMBOTRON
 
 DIV(`container-fluid',
-` BLOCK(`IfUseSidebar', `<div class="row"><div class="col-md-9">')
-
-  CONTENT
-
-  BLOCK(`ifUseSidebar',
-  `
-    </div><div class="col-md-3">
-
-    PORTRAIT
-
-    SIDENAV
-
-    </div></div>
+` DIV(`row',
+  ` DIV(`col-md-9',`CONTENT')
+    DIV(`col-md-3',`PORTRAIT SIDENAV')
   ')
 
   DIV(`row',
@@ -336,7 +284,9 @@ DIV(`container-fluid',
       BLOCK(`NextPage',`<li><a href="{NextPage}">Next</a></li>')
       </ul></nav>
     ')
-    DIV(`col-md-4 col-xs-4',`&copy; {CopyrightYears} {Title}')
+  ')
+  DIV(`row',
+  ` DIV(`col-md-4 col-xs-4',`&copy; {CopyrightYears} {Title}')
     DIV(`col-md-4 col-xs-4',`<p class="text-center">Page {CurrentPage} of {TotalPages}</p>')
     DIV(`col-md-4 col-xs-4',
     ` <p class="text-right">
