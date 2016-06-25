@@ -48,6 +48,7 @@ BOOL(`Use portrait caption',	`0')
 BOOL(`White buttons',		`0')
 BOOL(`Grey buttons',		`1')
 BOOL(`Black buttons',		`0')
+BOOL(`Full Size Images',	`0')
 
 define(`FONT', `<meta name="font:$1" content="$2">')
 
@@ -127,10 +128,11 @@ define(`DIV', `<div class="$1">$2</div>')
 define(`FA', `<span class="fa fa-$1" aria-hidden="true"></span>')
 
 define(`NAVITEMS',
-` BLOCK(`HasPages', `BLOCK(`Pages', `<li><a href="{URL}">FA(`bookmark') {Label}</a></li>')')
-  BLOCK(`SubmissionsEnabled', `<li><a href="{BlogURL}submit">FA(`cloud-upload') {SubmitLabel}</a></li>')
-  BLOCK(`AskEnabled', `<li><a href="{BlogURL}ask">FA(`envelope') {AskLabel}</a></li>')
+` <li><a href="{BlogURL}archive">FA(`calendar') Archive</a></li>
+  BLOCK(`HasPages', `BLOCK(`Pages', `<li><a href="{URL}">FA(`bookmark') {Label}</a></li>')')
   {text:Extra nav items}
+  BLOCK(`SubmissionsEnabled', `<li><a href="{BlogURL}submit">FA(`pencil') {SubmitLabel}</a></li>')
+  BLOCK(`AskEnabled', `<li><a href="{BlogURL}ask">FA(`envelope') {AskLabel}</a></li>')
   <li><a href="{RSS}">FA(`rss') RSS</a></li>
 ')
 
@@ -152,7 +154,7 @@ BLOCK(`IfUseNavbar',
       </ul>
       <form class="navbar-form navbar-right" role="search" action="{BlogURL}search" method="get">
       DIV(`form-group', `<input type="text" class="form-control" placeholder="Search" title="Search" name="q" value="{SearchQuery}">')
-      <button type="submit" class="btn btn-default">Go!</button>
+      <button type="submit" class="btn btn-default">FA(`search')<span class="sr-only">Submit</span></button>
       </form>
     </div>
   ')
@@ -189,15 +191,17 @@ dnl figuring out how to capitalize (or if we even need to) is more effort than i
 define(`BCOLOR', `BLOCK(`if$1Buttons', `{ReblogButton size="BSIZE" color="$2"} {LikeButton size="BSIZE" color="$2"}')')
 
 define(`TITLE',
-`ifelse($1,,
-`{block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}',
-`<div class="panel-heading"><h3 class="panel-title">$1</h3></div>')')
+` ifelse($1,,
+  ` BLOCK(`Title', `DIV(`panel-heading',`<h3 class="panel-title">{Title}</h3>')')',
+  ` DIV(`panel-heading', `<h3 class="panel-title">$1</h3>')'
+  )
+')
 
 define(`POST',`BLOCK(`$1',`TITLE($2)DIV(`panel-body',$3)')')
 
 define(`PIC',
 ` POST($1,,
-  ` $2<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">$3
+  ` $2BLOCK(`ifNotFullSizeImages',`<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">')BLOCK(`ifFullSizeImages',`<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">')$3
     BLOCK(`Caption', `DIV(`text-center', `<br>{Caption}')')',
   ` <a href="{PhotoUrl-HighRes}">FA(`save')<span class="sr-only">save</span></a>
   ')
@@ -217,13 +221,15 @@ define(`CONTENT',
               ` <a  href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>
               ')
             ')
-            BLOCK(`Caption', `DIV(`col-md-12 text-center',`<p>{Caption}</p>')')',)
-          POST(`Text',,`{Body}',)
-          POST(`Quote',,`<blockquote><p>{Quote}</p>BLOCK(`Source',`<footer>{Source}</footer>')</blockquote>',)
-          POST(`Link',` <a href="{URL}" {Target}>BLOCK(`Author', `{Author}: '){Name}</a>',
+            BLOCK(`Caption', `DIV(`col-md-12 text-center',`<p>{Caption}</p>')')
+          ')
+          POST(`Text',,`{Body}')
+          POST(`Quote',,`<blockquote><p>{Quote}</p>BLOCK(`Source',`<footer>{Source}</footer>')</blockquote>')
+          POST(`Link',` <a href="{URL}" {Target}><u>BLOCK(`Author', `{Author}: '){Name}</u></a>',
           ` BLOCK(`Thumbnail', `<img class="img-responsive" src="{Thumbnail}">')
             BLOCK(`Excerpt', `<blockquote><p>{Excerpt}</p></blockquote>')
-            BLOCK(`Description', `{Description}')',)
+            BLOCK(`Description', `{Description}')
+          ')
           POST(`Chat',,`BLOCK(`Lines', `BLOCK(`Label', `<b>{Label}</b>') {Line}<br>')',)
           POST(`Video',,`DIV(`text-center',`{Video-500}BLOCK(`Caption',`<p><br>{Caption}</p>')')',)
           POST(`Audio',` BLOCK(`Artist', `{Artist}BLOCK(`TrackName', `: ')')BLOCK(`TrackName', `{TrackName}')',
@@ -232,8 +238,8 @@ define(`CONTENT',
               BLOCK(`AudioEmbed', `{AudioEmbed-500}')
               BLOCK(`AudioPlayer', `{AudioPlayer}')
               BLOCK(`Caption', `<p><br>{Caption}</p>')
-            ')',
-          ` BLOCK(`ExternalAudio', `<a href="{ExternalAudioURL}">FA(`save')<span class="sr-only">save</span></a>')')
+            ')
+          ')
           POST(`Answer',,
           ` DIV(`text-right',`{Asker} asked: <blockquote class="blockquote-reverse"><p>{Question}</p></blockquote>')
             BLOCK(`Answerer',`{Answerer} replied: <blockquote>{Answer}</blockquote>')
@@ -267,8 +273,8 @@ define(`PORTRAIT',
     ` <img src="{image:Portrait}" alt="author portrait">
       BLOCK(`ifUsePortraitCaption',
       ` DIV(`caption',
-        ` <p>{text:Portrait Caption}</p>
-          BLOCK(`HideTitle', `BLOCK(`ShowDescription',`<p>{Description}</p>')')
+        ` {text:Portrait Caption}
+          BLOCK(`HideTitle', `BLOCK(`ShowDescription',`<br><br>{Description}')')
         ')
       ')
     ')
@@ -288,7 +294,7 @@ define(`SIDENAV',
       ` <form action="{BlogURL}search" method="get" role="search">
         DIV(`input-group',
         ` <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
-          <span class="input-group-btn"><button class="btn btn-default" type="submit">Go!</button></span>
+          <span class="input-group-btn"><button class="btn btn-default" type="submit">FA(`search')<span class="sr-only">Submit</span></button></span>
         ')
         </form>
         DIV(`searchpager',
@@ -332,7 +338,12 @@ DIV(`container-fluid',
     ')
     DIV(`col-md-4 col-xs-4',`&copy; {CopyrightYears} {Title}')
     DIV(`col-md-4 col-xs-4',`<p class="text-center">Page {CurrentPage} of {TotalPages}</p>')
-    DIV(`col-md-4 col-xs-4',`<p class="text-right">Theme: <a href="https://github.com/mishalindetak/unbroken">Unbroken</a>, by <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a></p>')
+    DIV(`col-md-4 col-xs-4',
+    ` <p class="text-right">
+      Bootswatch theme: <a href="https://bootswatch.com/{select:Bootswatch}/">{select:Bootswatch}</a>, by <a href="http://thomaspark.co/">Thomas Park</a><br>
+      Tumblr theme: <a href="https://github.com/mishalindetak/unbroken">unbroken</a>, by <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a>
+      </p>
+    ')
   ')
 
 ')
