@@ -80,7 +80,8 @@ body {
 {block:IfChangeTitleColor}color: {TitleColor};{/block:IfChangeTitleColor}
 }
 {/block:ShowTitle}
-.post .img-responsive { margin: 0 auto; }
+.post-img { margin: 0 auto; }
+.post img { width: auto; height: auto; max-width: 100%; max-height: 100vh; }
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
 .metainfo { margin-bottom: 3em; }
 #vnav { margin-bottom: 1.5em; }
@@ -107,13 +108,13 @@ blockquote { font-size: inherit; }
 {/block:Date}
 </div>
 <div class="col-md-8 post"> <div class="panel panel-default"> {block:Photo} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body Photo"><div class="text-center"><a href="{PhotoURL-HighRes}" data-toggle="lightbox">{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}</a></div>
+<div class="panel-body Photo"><div class="text-center"><a href="{PhotoURL-HighRes}" data-toggle="lightbox">{block:ifNotFullSizeImages}<img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}</a></div>
 {block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Photo}
 {block:Panorama} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body Panorama"><div class="text-center">{LinkOpenTag}{block:ifNotFullSizeImages}<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}{LinkCloseTag}</div>
+<div class="panel-body Panorama"><div class="text-center">{LinkOpenTag}{block:ifNotFullSizeImages}<img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}{LinkCloseTag}</div>
 {block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Panorama}
 {block:Photoset} <div class="panel-heading"><h3 class="panel-title">{PhotoCount} Photos</h3></div>
-<div class="panel-body Photoset"><div class="text-center">{block:Photos}{block:ifNotFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>{/block:ifFullSizeImages}<br>{/block:Photos}</div>
+<div class="panel-body Photoset"><div class="text-center">{block:Photos}{block:ifNotFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>{/block:ifFullSizeImages}<br>{/block:Photos}</div>
 {block:Caption}<p>{Caption}</p>{/block:Caption}
 </div>{/block:Photoset}
 {block:Text} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
@@ -121,7 +122,7 @@ blockquote { font-size: inherit; }
 {block:Quote} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body Quote"><blockquote><p>{Quote}</p>{block:Source}<footer>{Source}</footer>{/block:Source}</blockquote></div>{/block:Quote}
 {block:Link} <div class="panel-heading"><h3 class="panel-title"><a href="{URL}" {Target}><u>{block:Author}{Author}: {/block:Author}{Name}</u></a></h3></div>
-<div class="panel-body Link">{block:Thumbnail}<img class="img-responsive" src="{Thumbnail}">{/block:Thumbnail}
+<div class="panel-body Link">{block:Thumbnail}<img class="post-img" src="{Thumbnail}">{/block:Thumbnail}
 {block:Excerpt}<blockquote><p>{Excerpt}</p></blockquote>{/block:Excerpt}
 {block:Description}{Description}{/block:Description}
 </div>{/block:Link}
@@ -130,7 +131,7 @@ blockquote { font-size: inherit; }
 {block:Video} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body Video">{Video-500}{block:Caption}<p><br>{Caption}</p>{/block:Caption}</div>{/block:Video}
 {block:Audio} <div class="panel-heading"><h3 class="panel-title">{block:Artist}{Artist}{block:TrackName}: {/block:TrackName}{/block:Artist}{block:TrackName}{TrackName}{/block:TrackName}</h3></div>
-<div class="panel-body Audio">{block:AlbumArt}<img class="img-responsive" src="{AlbumArtURL}">{/block:AlbumArt}
+<div class="panel-body Audio">{block:AlbumArt}<img class="post-img" src="{AlbumArtURL}">{/block:AlbumArt}
 {block:AudioEmbed}{AudioEmbed-500}{/block:AudioEmbed}
 {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
 {block:Caption}<p><br>{Caption}</p>{/block:Caption}

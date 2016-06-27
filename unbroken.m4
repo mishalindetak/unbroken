@@ -93,7 +93,9 @@ BLOCK(`ShowTitle',
   }
 ')
 
-.post .img-responsive { margin: 0 auto; }
+.post-img { margin: 0 auto; }
+
+.post img { width: auto; height: auto; max-width: 100%; max-height: 100vh; }
 
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
 
@@ -161,7 +163,7 @@ define(`POST',`BLOCK(`$1',`TITLE($2)DIV(`panel-body $1',$3)')')
 
 define(`PIC',
 ` POST($1,,
-  ` DIV(`text-center', `$2BLOCK(`ifNotFullSizeImages',`<img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">')BLOCK(`ifFullSizeImages',`<img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">')$3')
+  ` DIV(`text-center', `$2BLOCK(`ifNotFullSizeImages',`<img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">')BLOCK(`ifFullSizeImages',`<img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">')$3')
     BLOCK(`Caption', `<br>{Caption}')',
   ` <a href="{PhotoUrl-HighRes}">FA(`save')<span class="sr-only">save</span></a>
   ')
@@ -175,20 +177,20 @@ define(`CONTENT',
       ` DIV(`panel panel-default',
         ` PIC(`Photo', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox">', `</a>')
           PIC(`Panorama', `{LinkOpenTag}', `{LinkCloseTag}')
-          POST(`Photoset',` {PhotoCount} Photos', `DIV(`text-center', `BLOCK(`Photos', `BLOCK(`ifNotFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="img-responsive" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>')BLOCK(`ifFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="img-responsive" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>')<br>')')
+          POST(`Photoset',` {PhotoCount} Photos', `DIV(`text-center', `BLOCK(`Photos', `BLOCK(`ifNotFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>')BLOCK(`ifFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>')<br>')')
             BLOCK(`Caption', `<p>{Caption}</p>')
           ')
           POST(`Text',,`{Body}')
           POST(`Quote',,`<blockquote><p>{Quote}</p>BLOCK(`Source',`<footer>{Source}</footer>')</blockquote>')
           POST(`Link',` <a href="{URL}" {Target}><u>BLOCK(`Author', `{Author}: '){Name}</u></a>',
-          ` BLOCK(`Thumbnail', `<img class="img-responsive" src="{Thumbnail}">')
+          ` BLOCK(`Thumbnail', `<img class="post-img" src="{Thumbnail}">')
             BLOCK(`Excerpt', `<blockquote><p>{Excerpt}</p></blockquote>')
             BLOCK(`Description', `{Description}')
           ')
           POST(`Chat',,`BLOCK(`Lines', `BLOCK(`Label', `<b>{Label}</b>') {Line}<br>')',)
           POST(`Video',,`{Video-500}BLOCK(`Caption',`<p><br>{Caption}</p>')',)
           POST(`Audio',` BLOCK(`Artist', `{Artist}BLOCK(`TrackName', `: ')')BLOCK(`TrackName', `{TrackName}')',
-          ` BLOCK(`AlbumArt', `<img class="img-responsive" src="{AlbumArtURL}">')
+          ` BLOCK(`AlbumArt', `<img class="post-img" src="{AlbumArtURL}">')
             BLOCK(`AudioEmbed', `{AudioEmbed-500}')
             BLOCK(`AudioPlayer', `{AudioPlayer}')
             BLOCK(`Caption', `<p><br>{Caption}</p>')
