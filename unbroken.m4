@@ -93,9 +93,9 @@ BLOCK(`ShowTitle',
   }
 ')
 
-.post-img { margin: 0 auto; }
+.post-img { margin: auto; }
 
-.post img { width: auto; height: auto; max-width: 100%; max-height: 100vh; }
+.post img { width: auto; height: auto; max-width: 100%; max-height: 90vh; }
 
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
 
@@ -184,14 +184,13 @@ define(`CONTENT',
       ` DIV(`panel panel-default',
         ` PIC(`Photo', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox">', `</a>')
           PIC(`Panorama', `{LinkOpenTag}', `{LinkCloseTag}')
-          POST(`Photoset',` {PhotoCount} Photos', `DIV(`text-center', `BLOCK(`Photos', `BLOCK(`ifNotFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>')BLOCK(`ifFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>')<br>')')
-            BLOCK(`Caption', `<p>{Caption}</p>')
+          POST(`Photoset',` {PhotoCount} Photos', `DIV(`text-center', `BLOCK(`Photos', `BLOCK(`ifNotFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>')BLOCK(`ifFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>')<br><br>')')
+            BLOCK(`Caption', `{Caption}')
           ')
           POST(`Text',,`{Body}')
           POST(`Quote',,`<blockquote><p>{Quote}</p>BLOCK(`Source',`<footer>{Source}</footer>')</blockquote>')
           POST(`Link',` <a href="{URL}" {Target}><u>BLOCK(`Author', `{Author}: '){Name}</u></a>',
-          ` BLOCK(`Thumbnail', `<img class="post-img" src="{Thumbnail}">')
-            BLOCK(`Excerpt', `<blockquote><p>{Excerpt}</p></blockquote>')
+          ` BLOCK(`Excerpt', `<blockquote><p>{Excerpt}</p></blockquote>')
             BLOCK(`Description', `{Description}')
           ')
           POST(`Chat',,`BLOCK(`Lines', `BLOCK(`Label', `<b>{Label}</b>') {Line}<br>')',)
