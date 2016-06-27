@@ -101,12 +101,19 @@ BLOCK(`ShowTitle',
 
 .metainfo { margin-bottom: 3em; }
 
+.metainfo a:link, .metainfo a:visited, .metainfo a:hover, .metainfo a:active {
+BLOCK(`ifGreyButtons', `color: #cccccc;')
+BLOCK(`ifWhiteButtons', `color: white;')
+BLOCK(`ifBlackButtons', `color: black;')
+}
+
 #vnav { margin-bottom: 1.5em; }
 
 @media (max-width: 991px) {
 .searchpager { display: none; }
 .reblog_button, .like_button { display: inline-block !important; margin-top: 0; margin-bottom: 0; }
 .date { text-align: left; }
+.metainfo { text-align: right; }
 }
 
 blockquote { font-size: inherit; }
@@ -147,7 +154,7 @@ define(`DATE',
   ')
 ')
 
-define(`BSIZE', `14')
+define(`BSIZE', `18')
 
 dnl figuring out how to capitalize (or if we even need to) is more effort than it's worth
 define(`BCOLOR', `BLOCK(`if$1Buttons', `{ReblogButton size="BSIZE" color="$2"} {LikeButton size="BSIZE" color="$2"}')')
@@ -214,7 +221,7 @@ define(`CONTENT',
       ` BLOCK(`Date',
         ` DIV(`metainfo',
           ` BCOLOR(`White',`white')BCOLOR(`Grey',`grey')BCOLOR(`Black',`black')
-            <a href="{Permalink}">FA(`link')<span class="sr-only">permalink</span></a>$1<br>
+            <a href="{Permalink}"><span class="fa fa-link fa-lg" aria-hidden="true"></span><span class="sr-only">permalink</span></a>$1<br>
           ')
         ')
       ')
