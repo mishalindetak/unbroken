@@ -284,25 +284,74 @@ DIV(`container-fluid',
   ')
 
   DIV(`row',
-  ` DIV(`col-md-12',
+  ` DIV(`col-md-11',
     ` <nav><ul class="pager">
       BLOCK(`PreviousPage',`<li><a href="{PreviousPage}">Previous</a></li>')
       BLOCK(`NextPage',`<li><a href="{NextPage}">Next</a></li>')
       </ul></nav>
     ')
+    DIV(`col-md-1 text-right', `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#copyrights">&copy;</button>')
   ')
-  DIV(`row',
-  ` DIV(`col-md-4 col-xs-4',`&copy; {CopyrightYears} {Title}')
-    DIV(`col-md-4 col-xs-4',`<p class="text-center">Page {CurrentPage} of {TotalPages}</p>')
-    DIV(`col-md-4 col-xs-4',
-    ` <p class="text-right">
-      Bootswatch theme: <a href="https://bootswatch.com/{select:Bootswatch}/">{select:Bootswatch}</a>, by <a href="http://thomaspark.co/">Thomas Park</a><br>
-      Tumblr theme: <a href="https://github.com/mishalindetak/unbroken">unbroken</a>, by <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a>
-      </p>
-    ')
-  ')
-
 ')
+
+<div class="modal fade" id="copyrights" tabindex="-1" role="dialog" aria-labelledby="copyrightsLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="copyrightsLabel">Copyrights</h4>
+      </div>
+      <div class="modal-body">
+<p>
+<b>Blog:</b> &copy; {CopyrightYears} {Title}
+</p>
+<p>
+<b>Tumblr theme:</b> <a href="https://github.com/mishalindetak/unbroken">unbroken</a>, &copy; 2016 <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a> under ISC license<br>
+<small><tt>Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+<br><br>
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</tt></small>
+</p>
+<p>
+<b>Bootswatch theme:</b> <a href="https://bootswatch.com/{select:Bootswatch}/">{select:Bootswatch}</a>, &copy; 2013 <a href="http://thomaspark.co/">Thomas Park</a> under MIT license<br>
+<b><a href="https://getbootstrap.com/">Bootstrap</a>:</b> &copy; 2011-2015 Twitter, Inc under MIT license<br>
+<b><a href="https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/">Responsive videos</a>:</b> Copyright (c) 2014 S. William Get-Blogging.com under MIT license (all bugs added by Misha Lindetak)<br>
+<b><a href="https://github.com/lightbox/jquery-keynav">J/K scrolling</a>:</b> Copyright (c) 2012 under MIT license<br>
+<b>Bootstrap fix for IE10:</b> Copyright (c) 2014-2015 Twitter, Inc .under MIT license<br>
+<small><tt>The MIT License (MIT)
+<br><br>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+<br><br>
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+<br><br>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</tt></small>
+</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 define(`SCRIPT', `<script src="$1" integrity="$2" crossorigin="anonymous"></script>')
 
@@ -417,7 +466,7 @@ $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
     $(this).ekkoLightbox();
 });
 
-// Fix for IE10
+// Bootstrap fix for IE10
 // Copyright (c) 2014-2015 Twitter, Inc.
 // MIT license
 if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
