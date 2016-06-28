@@ -291,6 +291,14 @@ JUMBOTRON
         </ul></nav>
       ')
     ')
+    BLOCK(`DayPagination',
+    ` DIV(`col-md-12',
+      ` <nav><ul class="pager">
+        BLOCK(`PreviousDayPage', `<li><a href="{PreviousDayPage}">FA(`arrow-left')<span class="sr-only">previous</span></a></li>')
+        BLOCK(`NextDayPage', `<li><a href="{NextDayPage}">FA(`arrow-right')<span class="sr-only">next</span></a></li>')
+        </ul></nav>
+      ')
+    ')
     DIV(`col-md-12 text-right',
     ` <a href="#top" class="btn btn-primary"><span class="fa fa-arrow-up" aria-hidden="true"></span><span class="sr-only">top of page</span></a>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#copyrights"><span class="fa fa-copyright" aria-hidden="true"></span><span class="sr-only">copyright information</span></button>
