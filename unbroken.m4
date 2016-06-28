@@ -110,6 +110,10 @@ BLOCK(`ifBlackButtons', `color: black;')
 
 #vnav { margin-bottom: 1.5em; }
 
+ol.notes { list-style-type: none; }
+
+li.note, li.note blockquote { margin-top: 0.5em; }
+
 @media (max-width: 991px) {
 .reblog_button, .like_button { display: inline-block !important; margin-top: 0; margin-bottom: 0; }
 .date { text-align: left; }
