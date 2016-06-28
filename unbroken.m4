@@ -111,7 +111,6 @@ BLOCK(`ifBlackButtons', `color: black;')
 #vnav { margin-bottom: 1.5em; }
 
 @media (max-width: 991px) {
-.searchpager { display: none; }
 .reblog_button, .like_button { display: inline-block !important; margin-top: 0; margin-bottom: 0; }
 .date { text-align: left; }
 .metainfo { text-align: right; }
@@ -261,14 +260,7 @@ define(`SIDENAV',
       ` <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
         <span class="input-group-btn"><button class="btn btn-default" type="submit">FA(`search')<span class="sr-only">Submit</span></button></span>
       ')
-      </form>
-      DIV(`searchpager',
-      ` <nav><ul class="pager">
-        BLOCK(`PreviousPage',`<li><a href="{PreviousPage}">Previous</a></li>')
-        BLOCK(`NextPage',`<li><a href="{NextPage}">Next</a></li>')
-        </ul></nav>
-        <p class="text-center">Page {CurrentPage} of {TotalPages}</p>
-      ')
+      </form> 
     ')
   ')
 ')
@@ -277,22 +269,31 @@ dnl actual page starts here
 
 JUMBOTRON
 
-DIV(`container-fluid',
-` DIV(`row',
+<div class="container-fluid" id="top">
+  DIV(`row',
   ` DIV(`col-md-9',`CONTENT')
     DIV(`col-md-3',`PORTRAIT SIDENAV')
   ')
 
   DIV(`row',
-  ` DIV(`col-md-11',
-    ` <nav><ul class="pager">
-      BLOCK(`PreviousPage',`<li><a href="{PreviousPage}">Previous</a></li>')
-      BLOCK(`NextPage',`<li><a href="{NextPage}">Next</a></li>')
-      </ul></nav>
+  ` BLOCK(`Pagination',
+    ` DIV(`col-md-12 text-center',
+      ` <nav><ul class="pagination">
+        BLOCK(`PreviousPage', `<li><a href="{PreviousPage}">FA(`arrow-left')<span class="sr-only">previous</span></a></li>')
+        {block:JumpPagination length="5"}
+          BLOCK(`CurrentPage', `<li class="active"><a href="#">{PageNumber}</a></li>')
+          BLOCK(`JumpPage', `<li><a href="{URL}">{PageNumber}</a></li>')
+        {/block:JumpPagination}
+        BLOCK(`NextPage', `<li><a href="{NextPage}">FA(`arrow-right')<span class="sr-only">next</span></a></li>')
+        </ul></nav>
+      ')
     ')
-    DIV(`col-md-1 text-right', `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#copyrights">&copy;</button>')
+    DIV(`col-md-12 text-right',
+    ` <a href="#top" class="btn btn-primary"><span class="fa fa-arrow-up" aria-hidden="true"></span><span class="sr-only">top of page</span></a>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#copyrights"><span class="fa fa-copyright" aria-hidden="true"></span><span class="sr-only">copyright information</span></button>
+    ')
   ')
-')
+</div>
 
 <div class="modal fade" id="copyrights" tabindex="-1" role="dialog" aria-labelledby="copyrightsLabel">
   <div class="modal-dialog" role="document">
@@ -344,6 +345,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</tt></small>
+</p>
+<p>
+<b>Icons:</b> <a href="http://fontawesome.io/license/">Font Awesome by Dave Gandy - http://fontawesome.io</a>
 </p>
       </div>
       <div class="modal-footer">

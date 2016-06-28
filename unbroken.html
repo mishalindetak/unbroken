@@ -91,7 +91,6 @@ body {
 }
 #vnav { margin-bottom: 1.5em; }
 @media (max-width: 991px) {
-.searchpager { display: none; }
 .reblog_button, .like_button { display: inline-block !important; margin-top: 0; margin-bottom: 0; }
 .date { text-align: left; }
 .metainfo { text-align: right; }
@@ -109,7 +108,8 @@ blockquote { font-size: inherit; }
 </div>
 {/block:ShowTitle}
 {/block:IndexPage}
-<div class="container-fluid"> <div class="row"> <div class="col-md-9"> {block:Posts} <div class="row"> <div class="col-md-3 text-right date"> {block:Date} {block:NewDayDate} <h2><a href="{BlogURL}day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">{Month} {DayOfMonth}{DayOfMonthSuffix}</a><br>
+<div class="container-fluid" id="top">
+<div class="row"> <div class="col-md-9"> {block:Posts} <div class="row"> <div class="col-md-3 text-right date"> {block:Date} {block:NewDayDate} <h2><a href="{BlogURL}day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">{Month} {DayOfMonth}{DayOfMonthSuffix}</a><br>
 <small>({TimeAgo})</small></h2>
 {/block:NewDayDate}
 {/block:Date}
@@ -183,22 +183,23 @@ blockquote { font-size: inherit; }
 <span class="input-group-btn"><button class="btn btn-default" type="submit"><span class="fa fa-search" aria-hidden="true"></span><span class="sr-only">Submit</span></button></span>
 </div>
 </form>
-<div class="searchpager"> <nav><ul class="pager">
-{block:PreviousPage}<li><a href="{PreviousPage}">Previous</a></li>{/block:PreviousPage}
-{block:NextPage}<li><a href="{NextPage}">Next</a></li>{/block:NextPage}
-</ul></nav>
-<p class="text-center">Page {CurrentPage} of {TotalPages}</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="row"> <div class="col-md-11"> <nav><ul class="pager">
-{block:PreviousPage}<li><a href="{PreviousPage}">Previous</a></li>{/block:PreviousPage}
-{block:NextPage}<li><a href="{NextPage}">Next</a></li>{/block:NextPage}
+<div class="row"> {block:Pagination} <div class="col-md-12 text-center"> <nav><ul class="pagination">
+{block:PreviousPage}<li><a href="{PreviousPage}"><span class="fa fa-arrow-left" aria-hidden="true"></span><span class="sr-only">previous</span></a></li>{/block:PreviousPage}
+{block:JumpPagination length="5"}
+{block:CurrentPage}<li class="active"><a href="#">{PageNumber}</a></li>{/block:CurrentPage}
+{block:JumpPage}<li><a href="{URL}">{PageNumber}</a></li>{/block:JumpPage}
+{/block:JumpPagination}
+{block:NextPage}<li><a href="{NextPage}"><span class="fa fa-arrow-right" aria-hidden="true"></span><span class="sr-only">next</span></a></li>{/block:NextPage}
 </ul></nav>
 </div>
-<div class="col-md-1 text-right"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#copyrights">&copy;</button></div>
+{/block:Pagination}
+<div class="col-md-12 text-right"> <a href="#top" class="btn btn-primary"><span class="fa fa-arrow-up" aria-hidden="true"></span><span class="sr-only">top of page</span></a>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#copyrights"><span class="fa fa-copyright" aria-hidden="true"></span><span class="sr-only">copyright information</span></button>
+</div>
 </div>
 </div>
 <div class="modal fade" id="copyrights" tabindex="-1" role="dialog" aria-labelledby="copyrightsLabel">
@@ -251,6 +252,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</tt></small>
+</p>
+<p>
+<b>Icons:</b> <a href="http://fontawesome.io/license/">Font Awesome by Dave Gandy - http://fontawesome.io</a>
 </p>
 </div>
 <div class="modal-footer">
