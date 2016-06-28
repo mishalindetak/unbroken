@@ -96,9 +96,9 @@ BLOCK(`ShowTitle',
 
 .post-img { margin: auto; }
 
-.post img { width: auto; height: auto; max-width: 100%; max-height: 80vh; }
+.post img { width: auto; height: auto; max-width: 100%; max-height: 75vh; }
 
-.panel-body { max-height: 90vh; overflow: auto;}
+.panel-body { max-height: 80vh; overflow: auto;}
 
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
 
@@ -377,7 +377,7 @@ SCRIPT(`https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox
 // All bugs added by Misha Lindetak
 $(window).resize(function(){
 
-  var max = 0.8 * (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight);
+  var max = 0.75 * (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight);
 
   $('.tumblr_video_container').each(function(){
     var scaleRatio = $(this).children('.tumblr_video_iframe').attr('data-width') / $(this).children('.tumblr_video_iframe').attr('data-height');
