@@ -317,9 +317,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</tt></small>
 <hr>
 <b>Bootswatch theme:</b> <a href="https://bootswatch.com/{select:Bootswatch}/">{select:Bootswatch}</a>, &copy; 2013 <a href="http://thomaspark.co/">Thomas Park</a> under MIT license<br>
 <b><a href="https://getbootstrap.com/">Bootstrap</a>:</b> &copy; 2011-2015 Twitter, Inc under MIT license<br>
+<b><a href="https://ashleydw.github.io/lightbox/">Lightbox</a>:</b> &copy; 2011-2015 ashleydw under MIT license<br>
 <b><a href="https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/">Responsive videos</a>:</b> Copyright (c) 2014 S. William Get-Blogging.com under MIT license (all bugs added by Misha Lindetak)<br>
 <b><a href="https://github.com/lightbox/jquery-keynav">J/K scrolling</a>:</b> Copyright (c) 2012 under MIT license<br>
-<b>Bootstrap fix for IE10:</b> Copyright (c) 2014-2015 Twitter, Inc .under MIT license<br><br>
+<b>Bootstrap fix for IE10:</b> Copyright (c) 2014-2015 Twitter, Inc under MIT license<br><br>
 <small><tt>The MIT License (MIT)
 <br><br>
 Permission is hereby granted, free of charge, to any person obtaining a copy
