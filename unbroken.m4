@@ -77,7 +77,8 @@ STYLE(`https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.c
 @-ms-viewport { width: device-width; }
 @-o-viewport { width: device-width; }
 @viewport { width: device-width; }
----
+
+/* Theme CSS */
 body {
 BLOCK(`IfChangeBodyFont', `font-family: {font:Body};')
 BLOCK(`HideTitle', `padding-top: 2em;')
@@ -119,6 +120,7 @@ BLOCK(`ifBlackButtons', `color: black;')
 blockquote { font-size: inherit; }
 .Quote blockquote { font-size: 1.5em; }
 
+/* Custom CSS */
 {CustomCSS}
 </style>
 
@@ -196,8 +198,7 @@ define(`CONTENT',
           POST(`Chat',,`BLOCK(`Lines', `BLOCK(`Label', `<b>{Label}</b>') {Line}<br>')',)
           POST(`Video',,`{Video-500}BLOCK(`Caption',`<p><br>{Caption}</p>')',)
           POST(`Audio',` BLOCK(`Artist', `{Artist}BLOCK(`TrackName', `: ')')BLOCK(`TrackName', `{TrackName}')',
-          ` BLOCK(`AlbumArt', `<img class="post-img" src="{AlbumArtURL}">')
-            BLOCK(`AudioEmbed', `{AudioEmbed-500}')
+          ` BLOCK(`AudioEmbed', `{AudioEmbed-250}')
             BLOCK(`AudioPlayer', `{AudioPlayer}')
             BLOCK(`Caption', `<p><br>{Caption}</p>')
           ')
@@ -310,30 +311,44 @@ SCRIPT(`https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',			
 SCRIPT(`https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js',	`sha384-2aVpK/uKiYlyFXHZ36wvxOPZyWeouEKvbSUlqCrkFhyT80n2aSYtT15Tgdn6g41M')
 
 <script type="text/javascript">
-// j/k scrolling https://github.com/lightbox/jquery-keynav
-/*
-Copyright (c) 2012
----
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
----
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
----
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+// responsive videos
+// Copyright (c) 2014 S. William Get-Blogging.com https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/
+// MIT license
+// All bugs added by Misha Lindetak
+$(window).resize(function(){
 
+  var max = 0.9 * (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight);
+
+  $('.tumblr_video_container').each(function(){
+    var scaleRatio = $(this).children('.tumblr_video_iframe').attr('data-width') / $(this).children('.tumblr_video_iframe').attr('data-height');
+    $(this).add($(this).children('.tumblr_video_iframe')).css('width', '100%');
+    var height = $(this).children('.tumblr_video_iframe').width() / scaleRatio;
+    if (height > max) {
+      height = max;
+      $(this).add($(this).children('.tumblr_video_iframe')).css('width', height * scaleRatio);
+    }
+    $(this).add($(this).children('.tumblr_video_iframe')).css('height', height)
+  });
+
+  $('iframe[src*="youtube.com"], iframe[src*="vimeo.com"], iframe[src*="dailymotion.com"]').each(function(){
+    var scaleRatio = $(this).prop('width') / $(this).prop('height');
+    $(this).css('width','100%');
+    var height = $(this).width() / scaleRatio;
+    if (height > max) {
+      height = max;
+      $(this).css('width', height * scaleRatio);
+    }
+    $(this).css('height', height);
+ 
+  });
+ 
+});
+ 
+$(window).resize();
+
+// j/k scrolling
+// Copyright (c) 2012 https://github.com/lightbox/jquery-keynav
+// MIT license
 $.fn.keynav = (function () {
 	//a couple of global things for the plugin
 	var nodes = $(), moving = false, positions = [], recalculate_positions, params;
@@ -392,19 +407,19 @@ $.fn.keynav = (function () {
 	};
 	
 })();
----
+
 // Enable j/k scrolling
 $('.post').keynav();
----
+
 // Enable lightbox
 $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
     event.preventDefault();
     $(this).ekkoLightbox();
 });
----
+
 // Fix for IE10
-// Copyright 2014-2015 Twitter, Inc.
-// Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+// Copyright (c) 2014-2015 Twitter, Inc.
+// MIT license
 if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
   var msViewportStyle = document.createElement('style')
   msViewportStyle.appendChild(
