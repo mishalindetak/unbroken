@@ -170,6 +170,13 @@ blockquote { font-size: inherit; }
 </div>
 {/block:ifUsePortrait}
 <ul class="nav nav-pills nav-stacked" id="vnav">
+<li>
+<form action="{BlogURL}search" method="get" role="search">
+<div class="input-group"> <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
+<span class="input-group-btn"><button class="btn btn-default" type="submit"><span class="fa fa-search" aria-hidden="true"></span><span class="sr-only">Submit</span></button></span>
+</div>
+</form>
+</li>
 <li><a href="{BlogURL}"><span class="fa fa-home" aria-hidden="true"></span> Home</a></li>
 <li><a href="{BlogURL}archive"><span class="fa fa-calendar" aria-hidden="true"></span> Archive</a></li>
 {block:HasPages}{block:Pages}<li><a href="{URL}"><span class="fa fa-bookmark" aria-hidden="true"></span> {Label}</a></li>{/block:Pages}{/block:HasPages}
@@ -178,13 +185,6 @@ blockquote { font-size: inherit; }
 {block:AskEnabled}<li><a href="{BlogURL}ask"><span class="fa fa-envelope" aria-hidden="true"></span> {AskLabel}</a></li>{/block:AskEnabled}
 <li><a href="{RSS}"><span class="fa fa-rss" aria-hidden="true"></span> RSS</a></li>
 </ul>
-<div class="panel panel-default"> <div class="panel-body"> <form action="{BlogURL}search" method="get" role="search">
-<div class="input-group"> <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
-<span class="input-group-btn"><button class="btn btn-default" type="submit"><span class="fa fa-search" aria-hidden="true"></span><span class="sr-only">Submit</span></button></span>
-</div>
-</form>
-</div>
-</div>
 </div>
 </div>
 <div class="row"> {block:Pagination} <div class="col-md-12 text-center"> <nav><ul class="pagination">
@@ -210,11 +210,9 @@ blockquote { font-size: inherit; }
 <h4 class="modal-title" id="copyrightsLabel">Copyrights</h4>
 </div>
 <div class="modal-body">
-<p>
 <b>Blog:</b> &copy; {CopyrightYears} {Title}
-</p>
-<p>
-<b>Tumblr theme:</b> <a href="https://github.com/mishalindetak/unbroken">unbroken</a>, &copy; 2016 <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a> under ISC license<br>
+<hr>
+<b>Tumblr theme:</b> <a href="https://github.com/mishalindetak/unbroken">unbroken</a>, &copy; 2016 <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a> under ISC license<br><br>
 <small><tt>Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
 copyright notice and this permission notice appear in all copies.
@@ -226,13 +224,12 @@ ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
 WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</tt></small>
-</p>
-<p>
+<hr>
 <b>Bootswatch theme:</b> <a href="https://bootswatch.com/{select:Bootswatch}/">{select:Bootswatch}</a>, &copy; 2013 <a href="http://thomaspark.co/">Thomas Park</a> under MIT license<br>
 <b><a href="https://getbootstrap.com/">Bootstrap</a>:</b> &copy; 2011-2015 Twitter, Inc under MIT license<br>
 <b><a href="https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/">Responsive videos</a>:</b> Copyright (c) 2014 S. William Get-Blogging.com under MIT license (all bugs added by Misha Lindetak)<br>
 <b><a href="https://github.com/lightbox/jquery-keynav">J/K scrolling</a>:</b> Copyright (c) 2012 under MIT license<br>
-<b>Bootstrap fix for IE10:</b> Copyright (c) 2014-2015 Twitter, Inc .under MIT license<br>
+<b>Bootstrap fix for IE10:</b> Copyright (c) 2014-2015 Twitter, Inc .under MIT license<br><br>
 <small><tt>The MIT License (MIT)
 <br><br>
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -252,10 +249,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</tt></small>
-</p>
-<p>
+<hr>
 <b>Icons:</b> <a href="http://fontawesome.io/license/">Font Awesome by Dave Gandy - http://fontawesome.io</a>
-</p>
 </div>
 <div class="modal-footer">
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
