@@ -191,18 +191,18 @@ blockquote { font-size: inherit; }
 </div>
 </div>
 <div class="row"> {block:Pagination} <div class="col-md-12 text-center"> <nav><ul class="pagination">
-{block:PreviousPage}<li><a href="{PreviousPage}"><span class="fa fa-arrow-left" aria-hidden="true"></span><span class="sr-only">previous</span></a></li>{/block:PreviousPage}
+{block:PreviousPage}<li><a href="{PreviousPage}" id="prevpage"><span class="fa fa-arrow-left" aria-hidden="true"></span><span class="sr-only">previous</span></a></li>{/block:PreviousPage}
 {block:JumpPagination length="5"}
 {block:CurrentPage}<li class="active"><a href="#">{PageNumber}</a></li>{/block:CurrentPage}
 {block:JumpPage}<li><a href="{URL}">{PageNumber}</a></li>{/block:JumpPage}
 {/block:JumpPagination}
-{block:NextPage}<li><a href="{NextPage}"><span class="fa fa-arrow-right" aria-hidden="true"></span><span class="sr-only">next</span></a></li>{/block:NextPage}
+{block:NextPage}<li><a href="{NextPage}" id="nextpage"><span class="fa fa-arrow-right" aria-hidden="true"></span><span class="sr-only">next</span></a></li>{/block:NextPage}
 </ul></nav>
 </div>
 {/block:Pagination}
 {block:DayPagination} <div class="col-md-12"> <nav><ul class="pager">
-{block:PreviousDayPage}<li><a href="{PreviousDayPage}"><span class="fa fa-arrow-left" aria-hidden="true"></span><span class="sr-only">previous</span></a></li>{/block:PreviousDayPage}
-{block:NextDayPage}<li><a href="{NextDayPage}"><span class="fa fa-arrow-right" aria-hidden="true"></span><span class="sr-only">next</span></a></li>{/block:NextDayPage}
+{block:PreviousDayPage}<li><a href="{PreviousDayPage}" id="prevpage"><span class="fa fa-arrow-left" aria-hidden="true"></span><span class="sr-only">previous</span></a></li>{/block:PreviousDayPage}
+{block:NextDayPage}<li><a href="{NextDayPage}" id="nextpage"><span class="fa fa-arrow-right" aria-hidden="true"></span><span class="sr-only">next</span></a></li>{/block:NextDayPage}
 </ul></nav>
 </div>
 {/block:DayPagination}
@@ -272,6 +272,16 @@ THE SOFTWARE.</tt></small>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js" integrity="sha384-2aVpK/uKiYlyFXHZ36wvxOPZyWeouEKvbSUlqCrkFhyT80n2aSYtT15Tgdn6g41M" crossorigin="anonymous"></script>
 <script type="text/javascript">
+// Previous/next page navigation
+$(document).keydown(function(e){
+if (e.target && e.target.tagName == 'TEXTAREA' || e.target.tagName == 'INPUT') {
+return true;
+}
+switch(e.keyCode) {
+case 72: case 80: $('#prevpage')[0].click(); break;
+case 76: case 78: $('#nextpage')[0].click(); break;
+}
+});
 // responsive videos
 // Copyright (c) 2014 S. William Get-Blogging.com https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/
 // MIT license

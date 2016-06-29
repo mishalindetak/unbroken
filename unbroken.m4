@@ -282,20 +282,20 @@ JUMBOTRON
   ` BLOCK(`Pagination',
     ` DIV(`col-md-12 text-center',
       ` <nav><ul class="pagination">
-        BLOCK(`PreviousPage', `<li><a href="{PreviousPage}">FA(`arrow-left')<span class="sr-only">previous</span></a></li>')
+        BLOCK(`PreviousPage', `<li><a href="{PreviousPage}" id="prevpage">FA(`arrow-left')<span class="sr-only">previous</span></a></li>')
         {block:JumpPagination length="5"}
           BLOCK(`CurrentPage', `<li class="active"><a href="#">{PageNumber}</a></li>')
           BLOCK(`JumpPage', `<li><a href="{URL}">{PageNumber}</a></li>')
         {/block:JumpPagination}
-        BLOCK(`NextPage', `<li><a href="{NextPage}">FA(`arrow-right')<span class="sr-only">next</span></a></li>')
+        BLOCK(`NextPage', `<li><a href="{NextPage}" id="nextpage">FA(`arrow-right')<span class="sr-only">next</span></a></li>')
         </ul></nav>
       ')
     ')
     BLOCK(`DayPagination',
     ` DIV(`col-md-12',
       ` <nav><ul class="pager">
-        BLOCK(`PreviousDayPage', `<li><a href="{PreviousDayPage}">FA(`arrow-left')<span class="sr-only">previous</span></a></li>')
-        BLOCK(`NextDayPage', `<li><a href="{NextDayPage}">FA(`arrow-right')<span class="sr-only">next</span></a></li>')
+        BLOCK(`PreviousDayPage', `<li><a href="{PreviousDayPage}" id="prevpage">FA(`arrow-left')<span class="sr-only">previous</span></a></li>')
+        BLOCK(`NextDayPage', `<li><a href="{NextDayPage}" id="nextpage">FA(`arrow-right')<span class="sr-only">next</span></a></li>')
         </ul></nav>
       ')
     ')
@@ -371,6 +371,17 @@ SCRIPT(`https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',			
 SCRIPT(`https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js',	`sha384-2aVpK/uKiYlyFXHZ36wvxOPZyWeouEKvbSUlqCrkFhyT80n2aSYtT15Tgdn6g41M')
 
 <script type="text/javascript">
+// Previous/next page navigation
+$(document).keydown(function(e){
+  if (e.target && e.target.tagName == 'TEXTAREA' || e.target.tagName == 'INPUT') {
+    return true;
+  }
+  switch(e.keyCode) {
+    case 72: case 80: $('#prevpage')[0].click(); break;
+    case 76: case 78: $('#nextpage')[0].click(); break;
+  }
+});
+
 // responsive videos
 // Copyright (c) 2014 S. William Get-Blogging.com https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/
 // MIT license
