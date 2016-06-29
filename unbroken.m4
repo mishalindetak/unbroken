@@ -81,8 +81,7 @@ STYLE(`https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.c
 /* Theme CSS */
 body {
 BLOCK(`IfChangeBodyFont', `font-family: {font:Body};')
-BLOCK(`HideTitle', `padding-top: 2em;')
-BLOCK(`ShowTitle', `BLOCK(`PermalinkPage', `padding-top: 2em;')')
+BLOCK(`HideTitle', `padding-top: 20px;')
 }
 
 BLOCK(`IfChangeTitleFont', `h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: {font:Title}; }')
@@ -138,13 +137,11 @@ define(`DIV', `<div class="$1">$2</div>')
 define(`FA', `<span class="fa fa-$1" aria-hidden="true"></span>')
 
 define(`JUMBOTRON',
-` BLOCK(`IndexPage',
-  ` BLOCK(`ShowTitle',
-    ` DIV(`header jumbotron',
-      ` DIV(`container',
-        ` <h1><a href="{BlogURL}">{Title}</a></h1>
-          BLOCK(`ShowDescription', `<p>{Description}</p>')
-        ')
+` BLOCK(`ShowTitle',
+  ` DIV(`header jumbotron',
+    ` DIV(`container',
+      ` <h1><a href="{BlogURL}">{Title}</a></h1>
+        BLOCK(`ShowDescription', `<p>{Description}</p>')
       ')
     ')
   ')

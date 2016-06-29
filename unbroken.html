@@ -71,8 +71,7 @@
 /* Theme CSS */
 body {
 {block:IfChangeBodyFont}font-family: {font:Body};{/block:IfChangeBodyFont}
-{block:HideTitle}padding-top: 2em;{/block:HideTitle}
-{block:ShowTitle}{block:PermalinkPage}padding-top: 2em;{/block:PermalinkPage}{/block:ShowTitle}
+{block:HideTitle}padding-top: 20px;{/block:HideTitle}
 }
 {block:IfChangeTitleFont}h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: {font:Title}; }{/block:IfChangeTitleFont}
 {block:ShowTitle} .header {
@@ -105,12 +104,11 @@ blockquote { font-size: inherit; }
 </style>
 </head>
 <body>
-{block:IndexPage} {block:ShowTitle} <div class="header jumbotron"> <div class="container"> <h1><a href="{BlogURL}">{Title}</a></h1>
+{block:ShowTitle} <div class="header jumbotron"> <div class="container"> <h1><a href="{BlogURL}">{Title}</a></h1>
 {block:ShowDescription}<p>{Description}</p>{/block:ShowDescription}
 </div>
 </div>
 {/block:ShowTitle}
-{/block:IndexPage}
 <div class="container-fluid" id="top">
 <div class="row"> <div class="col-md-9"> {block:Posts} <div class="row"> <div class="col-md-3 text-right date"> {block:Date} {block:NewDayDate} <h2><a href="{BlogURL}day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">{Month} {DayOfMonth}{DayOfMonthSuffix}</a><br>
 <small>({TimeAgo})</small></h2>
