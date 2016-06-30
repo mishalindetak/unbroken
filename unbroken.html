@@ -307,7 +307,6 @@ $(this).css('width', height * scaleRatio);
 $(this).css('height', height);
 });
 });
-$(window).resize();
 // j/k scrolling
 // Copyright (c) 2012 https://github.com/lightbox/jquery-keynav
 // MIT license
@@ -365,6 +364,9 @@ nodes = nodes.add(this);
 recalculate_positions();
 };
 })();
+$(document).ready(function() {
+// Trigger resizing of videos
+$(window).resize();
 // Enable j/k scrolling
 $('.post').keynav();
 // Enable lightbox
@@ -384,6 +386,7 @@ document.createTextNode(
 )
 document.querySelector('head').appendChild(msViewportStyle)
 }
+});
 </script>
 </body>
 </html>

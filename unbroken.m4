@@ -412,7 +412,6 @@ $(window).resize(function(){
  
 });
  
-$(window).resize();
 
 // j/k scrolling
 // Copyright (c) 2012 https://github.com/lightbox/jquery-keynav
@@ -476,27 +475,35 @@ $.fn.keynav = (function () {
 	
 })();
 
-// Enable j/k scrolling
-$('.post').keynav();
+$(document).ready(function() {
 
-// Enable lightbox
-$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-    event.preventDefault();
-    $(this).ekkoLightbox();
+  // Trigger resizing of videos
+  $(window).resize();
+
+  // Enable j/k scrolling
+  $('.post').keynav();
+
+  // Enable lightbox
+  $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox();
+  });
+
+  // Bootstrap fix for IE10
+  // Copyright (c) 2014-2015 Twitter, Inc.
+  // MIT license
+  if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+    var msViewportStyle = document.createElement('style')
+    msViewportStyle.appendChild(
+      document.createTextNode(
+        '@-ms-viewport{width:auto!important}'
+      )
+    )
+    document.querySelector('head').appendChild(msViewportStyle)
+}
+
 });
 
-// Bootstrap fix for IE10
-// Copyright (c) 2014-2015 Twitter, Inc.
-// MIT license
-if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-  var msViewportStyle = document.createElement('style')
-  msViewportStyle.appendChild(
-    document.createTextNode(
-      '@-ms-viewport{width:auto!important}'
-    )
-  )
-  document.querySelector('head').appendChild(msViewportStyle)
-}
 </script>
 
 </body>
