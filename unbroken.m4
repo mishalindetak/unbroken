@@ -42,7 +42,6 @@ BOOL(`Use portrait caption',	`0')
 BOOL(`White buttons',		`0')
 BOOL(`Grey buttons',		`1')
 BOOL(`Black buttons',		`0')
-BOOL(`Full Size Images',	`0')
 
 define(`FONT', `<meta name="font:$1" content="$2">')
 
@@ -93,7 +92,7 @@ BLOCK(`ShowTitle',
   }
 ')
 
-.post-img { margin: auto; }
+.photo { margin: auto; }
 
 .post img { width: auto; height: auto; max-width: 100%; max-height: 75vh; }
 
@@ -172,9 +171,11 @@ define(`TITLE',
 
 define(`POST',`BLOCK(`$1',`TITLE($2)DIV(`panel-body $1',$3)')')
 
+define(`PHOTO', `<img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w`,' {PhotoURL-500} 500w`,' {PhotoURL-400} 400w`,' {PhotoURL-250} 250w`,' {PhotoURL-100} 100w" alt="{PhotoAlt}">')
+
 define(`PIC',
 ` POST($1,,
-  ` DIV(`text-center', `$2BLOCK(`ifNotFullSizeImages',`<img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">')BLOCK(`ifFullSizeImages',`<img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">')$3')
+  ` DIV(`text-center', `$2PHOTO$3')
     BLOCK(`Caption', `<br>{Caption}')',
   ` <a href="{PhotoUrl-HighRes}">FA(`save')<span class="sr-only">save</span></a>
   ')
@@ -188,7 +189,7 @@ define(`CONTENT',
       ` DIV(`panel panel-default',
         ` PIC(`Photo', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox">', `</a>')
           PIC(`Panorama', `{LinkOpenTag}', `{LinkCloseTag}')
-          POST(`Photoset',` {PhotoCount} Photos', `DIV(`text-center', `BLOCK(`Photos', `BLOCK(`ifNotFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>')BLOCK(`ifFullSizeImages', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')><img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>')<br><br>')')
+          POST(`Photoset',` {PhotoCount} Photos', `DIV(`text-center', `BLOCK(`Photos', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')>PHOTO</a><br><br>')')
             BLOCK(`Caption', `{Caption}')
           ')
           POST(`Text',,`{Body}')

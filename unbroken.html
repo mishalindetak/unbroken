@@ -44,7 +44,6 @@
 <meta name="if:White buttons" content="0">
 <meta name="if:Grey buttons" content="1">
 <meta name="if:Black buttons" content="0">
-<meta name="if:Full Size Images" content="0">
 <meta name="font:Title" content="{TitleFont}">
 <meta name="font:Body" content="Arial, Helvetica, sans-serif">
 <meta name="image:Portrait">
@@ -79,7 +78,7 @@ body {
 {block:IfChangeTitleColor}color: {TitleColor};{/block:IfChangeTitleColor}
 }
 {/block:ShowTitle}
-.post-img { margin: auto; }
+.photo { margin: auto; }
 .post img { width: auto; height: auto; max-width: 100%; max-height: 75vh; }
 .panel-body { max-height: 80vh; overflow: auto;}
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
@@ -116,13 +115,13 @@ blockquote { font-size: inherit; }
 {/block:Date}
 </div>
 <div class="col-md-8 post"> <div class="panel panel-default"> {block:Photo} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body Photo"><div class="text-center"><a href="{PhotoURL-HighRes}" data-toggle="lightbox">{block:ifNotFullSizeImages}<img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}</a></div>
+<div class="panel-body Photo"><div class="text-center"><a href="{PhotoURL-HighRes}" data-toggle="lightbox"><img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w, {PhotoURL-500} 500w, {PhotoURL-400} 400w, {PhotoURL-250} 250w, {PhotoURL-100} 100w" alt="{PhotoAlt}"></a></div>
 {block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Photo}
 {block:Panorama} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body Panorama"><div class="text-center">{LinkOpenTag}{block:ifNotFullSizeImages}<img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}">{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}">{/block:ifFullSizeImages}{LinkCloseTag}</div>
+<div class="panel-body Panorama"><div class="text-center">{LinkOpenTag}<img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w, {PhotoURL-500} 500w, {PhotoURL-400} 400w, {PhotoURL-250} 250w, {PhotoURL-100} 100w" alt="{PhotoAlt}">{LinkCloseTag}</div>
 {block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Panorama}
 {block:Photoset} <div class="panel-heading"><h3 class="panel-title">{PhotoCount} Photos</h3></div>
-<div class="panel-body Photoset"><div class="text-center">{block:Photos}{block:ifNotFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="post-img" src="{PhotoURL-500}" alt="{PhotoAlt}" width="{PhotoWidth-500}" height="{PhotoHeight-500}"></a>{/block:ifNotFullSizeImages}{block:ifFullSizeImages}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="post-img" src="{PhotoURL-HighRes}" alt="{PhotoAlt}" width="{PhotoWidth-HighRes}" height="{PhotoHeight-HighRes}"></a>{/block:ifFullSizeImages}<br><br>{/block:Photos}</div>
+<div class="panel-body Photoset"><div class="text-center">{block:Photos}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w, {PhotoURL-500} 500w, {PhotoURL-400} 400w, {PhotoURL-250} 250w, {PhotoURL-100} 100w" alt="{PhotoAlt}"></a><br><br>{/block:Photos}</div>
 {block:Caption}{Caption}{/block:Caption}
 </div>{/block:Photoset}
 {block:Text} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
