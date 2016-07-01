@@ -38,7 +38,8 @@ BOOL(`Change title color',	`0')
 BOOL(`Change title font',	`0')
 BOOL(`Change body font',	`0')
 BOOL(`Use portrait',		`0')
-BOOL(`Use portrait caption',	`0')
+BOOL(`Extra nav space',		`0')
+BOOL(`Elsewhere nav',		`0')
 BOOL(`White buttons',		`0')
 BOOL(`Grey buttons',		`1')
 BOOL(`Black buttons',		`0')
@@ -50,8 +51,14 @@ FONT(`Body', `Arial, Helvetica, sans-serif')
 
 <meta name="image:Portrait">
 
-<meta name="text:Portrait caption">
-<meta name="text:Extra nav items">
+define(`TEXT', `<meta name="text:$1">')
+
+TEXT(`Portrait caption')
+TEXT(`Copyright name')
+TEXT(`Extra nav items')
+TEXT(`Elsewhere')
+TEXT(`Charahub')
+TEXT(`GitHub')
 
 <title>{Title}BLOCK(`PostTitle', ` - {PostTitle}')</title>
 BLOCK(`Description', `<meta name="description" content="{MetaDescription}">')
@@ -78,25 +85,20 @@ STYLE(`https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.c
 @viewport { width: device-width; }
 
 /* Theme CSS */
-body {
-BLOCK(`IfChangeBodyFont', `font-family: {font:Body};')
-BLOCK(`HideTitle', `padding-top: 20px;')
-}
+BLOCK(`IfChangeBodyFont', `body { font-family: {font:Body};} ')
 
 BLOCK(`IfChangeTitleFont', `h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: {font:Title}; }')
 
-BLOCK(`ShowTitle',
-` .header {
-  BLOCK(`ShowHeaderImage', `background-image: url("{HeaderImage}");')
-  BLOCK(`IfChangeTitleColor', `color: {TitleColor};')
-  }
-')
+.header {
+BLOCK(`ShowHeaderImage', `background-image: url("{HeaderImage}");')
+BLOCK(`IfChangeTitleColor', `color: {TitleColor};')
+}
 
 .photo { margin: auto; }
 
 .post img { width: auto; height: auto; max-width: 100%; max-height: 75vh; }
 
-.panel-body { max-height: 80vh; overflow: auto;}
+BLOCK(`IndexPage', `.panel-body { max-height: 80vh; overflow: auto; }')
 
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
 
@@ -107,8 +109,6 @@ BLOCK(`ifGreyButtons', `color: #cccccc;')
 BLOCK(`ifWhiteButtons', `color: white;')
 BLOCK(`ifBlackButtons', `color: black;')
 }
-
-#vnav { margin-bottom: 1.5em; }
 
 ol.notes { list-style-type: none; }
 
@@ -136,12 +136,10 @@ define(`DIV', `<div class="$1">$2</div>')
 define(`FA', `<span class="fa fa-$1" aria-hidden="true"></span>')
 
 define(`JUMBOTRON',
-` BLOCK(`ShowTitle',
-  ` DIV(`header jumbotron',
-    ` DIV(`container',
-      ` <h1><a href="{BlogURL}">{Title}</a></h1>
-        BLOCK(`ShowDescription', `<p>{Description}</p>')
-      ')
+` DIV(`header jumbotron',
+  ` DIV(`container',
+    ` <h1><a href="{BlogURL}">{Title}</a></h1>
+      BLOCK(`ShowDescription', `<p>{Description}</p>')
     ')
   ')
 ')
@@ -236,34 +234,34 @@ define(`PORTRAIT',
 ` BLOCK(`ifUsePortrait',
   ` DIV(`thumbnail',
     ` <img src="{image:Portrait}" alt="author portrait">
-      BLOCK(`ifUsePortraitCaption',
-      ` DIV(`caption',
-        ` {text:Portrait Caption}
-          BLOCK(`HideTitle', `BLOCK(`ShowDescription',`<br><br>{Description}')')
-        ')
-      ')
+      BLOCK(`IfPortraitCaption', `DIV(`caption', `{text:Portrait Caption}')')
     ')
   ')
 ')
 
 define(`SIDENAV',
-` <ul class="nav nav-pills nav-stacked" id="vnav">
-  <li>
-    <form action="{BlogURL}search" method="get" role="search">
-    DIV(`input-group',
-    ` <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
-      <span class="input-group-btn"><button class="btn btn-default" type="submit">FA(`search')<span class="sr-only">Submit</span></button></span>
-    ')
-    </form>
-  </li>
-  <li><a href="{BlogURL}">FA(`home') Home</a></li>
+` <form action="{BlogURL}search" method="get" role="search">
+  DIV(`input-group',
+  ` <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
+    <span class="input-group-btn"><button class="btn btn-default" type="submit">FA(`search')<span class="sr-only">Submit</span></button></span>
+  ')
+  </form><br>
+  <ul class="nav nav-pills nav-stacked">
   <li><a href="{BlogURL}archive">FA(`calendar') Archive</a></li>
+  BLOCK(`AskEnabled', `<li><a href="{BlogURL}ask">FA(`envelope') {AskLabel}</a></li>')
+  BLOCK(`SubmissionsEnabled', `<li><a href="{BlogURL}submit">FA(`pencil') {SubmitLabel}</a></li>')
+  BLOCK(`ifExtraNavSpace', `</ul><br><ul class="nav nav-pills nav-stacked">')
   BLOCK(`HasPages', `BLOCK(`Pages', `<li><a href="{URL}">FA(`bookmark') {Label}</a></li>')')
   {text:Extra nav items}
-  BLOCK(`SubmissionsEnabled', `<li><a href="{BlogURL}submit">FA(`pencil') {SubmitLabel}</a></li>')
-  BLOCK(`AskEnabled', `<li><a href="{BlogURL}ask">FA(`envelope') {AskLabel}</a></li>')
-  <li><a href="{RSS}">FA(`rss') RSS</a></li>
   </ul>
+  BLOCK(`ifElsewhereNav',
+  ` <h2>Elsewhere</h2>
+    <ul class="nav nav-pills nav-stacked">
+    {text:Elsewhere}
+    BLOCK(`IfCharahub', `<li><a href="https://charahub.com/user/{text:Charahub}" target="_blank">FA(`user') Charahub</a></li>')
+    BLOCK(`IfGitHub', `<li><a href="https://github.com/{text:GitHub}" target="_blank">FA(`github') GitHub</a></li>')
+    </ul>
+  ')
 ')
 
 dnl actual page starts here
@@ -299,6 +297,7 @@ JUMBOTRON
     ')
     DIV(`col-md-12 text-right',
     ` <a href="#top" class="btn btn-primary"><span class="fa fa-arrow-up" aria-hidden="true"></span><span class="sr-only">top of page</span></a>
+      <a href="{RSS}" class="btn btn-primary"><span class="fa fa-rss" aria-hidden="true"></span><span class="sr-only">RSS</span></a>
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#copyrights"><span class="fa fa-copyright" aria-hidden="true"></span><span class="sr-only">copyright information</span></button>
     ')
   ')
@@ -312,9 +311,9 @@ JUMBOTRON
         <h4 class="modal-title" id="copyrightsLabel">Copyrights</h4>
       </div>
       <div class="modal-body">
-<b>Blog:</b> &copy; {CopyrightYears} {Title}
+<b>{Title}</b> &copy; {CopyrightYears} {text:Copyright name}
 <hr>
-<b>Tumblr theme:</b> <a href="https://github.com/mishalindetak/unbroken">unbroken</a>, &copy; 2016 <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a> under ISC license<br><br>
+<b>Tumblr theme:</b> <a href="https://github.com/mishalindetak/unbroken">unbroken</a> &copy; 2016 <a href="https://mishalindetak.tumblr.com/">Misha Lindetak</a> under ISC license<br><br>
 <small><tt>Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted, provided that the above
 copyright notice and this permission notice appear in all copies.
@@ -327,12 +326,12 @@ WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</tt></small>
 <hr>
-<b>Bootswatch theme:</b> <a href="https://bootswatch.com/{select:Bootswatch}/">{select:Bootswatch}</a>, &copy; 2013 <a href="http://thomaspark.co/">Thomas Park</a> under MIT license<br>
-<b><a href="https://getbootstrap.com/">Bootstrap</a>:</b> &copy; 2011-2015 Twitter, Inc under MIT license<br>
-<b><a href="https://ashleydw.github.io/lightbox/">Lightbox</a>:</b> &copy; 2011-2015 ashleydw under MIT license<br>
-<b><a href="https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/">Responsive videos</a>:</b> Copyright (c) 2014 S. William Get-Blogging.com under MIT license (all bugs added by Misha Lindetak)<br>
-<b><a href="https://github.com/lightbox/jquery-keynav">J/K scrolling</a>:</b> Copyright (c) 2012 under MIT license<br>
-<b>Bootstrap fix for IE10:</b> Copyright (c) 2014-2015 Twitter, Inc under MIT license<br><br>
+<b><a href="https://bootswatch.com/{select:Bootswatch}/">Bootswatch theme: {select:Bootswatch}</a></b> &copy; 2013 <a href="http://thomaspark.co/">Thomas Park</a> under MIT license<br>
+<b><a href="https://getbootstrap.com/">Bootstrap</a></b> &copy; 2011-2015 Twitter, Inc under MIT license<br>
+<b><a href="https://ashleydw.github.io/lightbox/">Lightbox</a></b> &copy; 2011-2015 ashleydw under MIT license<br>
+<b><a href="https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/">Responsive videos</a></b> &copy; 2014 S. William Get-Blogging.com under MIT license (all bugs added by Misha Lindetak)<br>
+<b><a href="https://github.com/lightbox/jquery-keynav">J/K scrolling</a></b> &copy; 2012 under MIT license<br>
+<b>Bootstrap fix for IE10</b> &copy; 2014-2015 Twitter, Inc under MIT license<br><br>
 <small><tt>The MIT License (MIT)
 <br><br>
 Permission is hereby granted, free of charge, to any person obtaining a copy
