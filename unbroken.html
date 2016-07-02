@@ -268,43 +268,10 @@ THE SOFTWARE.</tt></small>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" integrity="sha384-6ePHh72Rl3hKio4HiJ841psfsRJveeS+aLoaEf3BWfS+gTF0XdAqku2ka8VddikM" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="https://cdn.rawgit.com/mishalindetak/unbroken/dfd0a2ca68d147383ebfbc0127b96083718fa491/ie10fix.js" integrity="sha384-Upxx4F1UKNh6OVGGabosYhbzAN3hDcsETf4eziClbBLJwG+tgzraP7Qe8Se1M6UP" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js" integrity="sha384-2aVpK/uKiYlyFXHZ36wvxOPZyWeouEKvbSUlqCrkFhyT80n2aSYtT15Tgdn6g41M" crossorigin="anonymous"></script>
 <script src="https://cdn.rawgit.com/lightbox/jquery-keynav/b73a9c597315f4cec9b54a0889f3de01c58ee21f/jquery.keynav.js" integrity="sha384-ppIdM2QljKNY0HjGVJTSOQT5/72E5I67qHym+ZJhhkqX0RZfegzYf5JplBbHGZU+" crossorigin="anonymous"></script>
 <script src="https://cdn.rawgit.com/mishalindetak/unbroken/aa5459d0ab9286486f6d744f2998b9ce58eee42b/responsive.js" integrity="sha384-karCNJRpJOxkP1mf19CQEMZ445UWJsdZCh8EfOaC0hAmpXNmu700X85/NcHk+G5w" crossorigin="anonymous"></script>
-<script type="text/javascript">
-// Previous/next page navigation
-$(document).keydown(function(e){
-if (e.target && e.target.tagName == 'TEXTAREA' || e.target.tagName == 'INPUT') {
-return true;
-}
-switch(e.keyCode) {
-case 72: case 80: $('#prevpage')[0].click(); break;
-case 76: case 78: $('#nextpage')[0].click(); break;
-}
-});
-$(document).ready(function() {
-// Trigger resizing of videos
-$(window).resize();
-// Enable j/k scrolling
-$('.post').keynav();
-// Enable lightbox
-$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-event.preventDefault();
-$(this).ekkoLightbox();
-});
-// Bootstrap fix for IE10
-// Copyright (c) 2014-2015 Twitter, Inc.
-// MIT license
-if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-var msViewportStyle = document.createElement('style')
-msViewportStyle.appendChild(
-document.createTextNode(
-'@-ms-viewport{width:auto!important}'
-)
-)
-document.querySelector('head').appendChild(msViewportStyle)
-}
-});
-</script>
+<script src="https://cdn.rawgit.com/mishalindetak/unbroken/ac81b5b2a776b16f292c840668fb79cf090d4f96/unbroken.js" integrity="sha384-w5UtbJaGJkMrhlynIMUco/utuCzK7znIRqi9gU+noyJbcRdMsD7fMxm/esppPDZj" crossorigin="anonymous"></script>
 </body>
 </html>

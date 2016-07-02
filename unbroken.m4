@@ -365,52 +365,11 @@ define(`SCRIPT', `<script src="$1" integrity="$2" crossorigin="anonymous"></scri
 
 SCRIPT(`https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js',						`sha384-6ePHh72Rl3hKio4HiJ841psfsRJveeS+aLoaEf3BWfS+gTF0XdAqku2ka8VddikM')
 SCRIPT(`https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',						`sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS')
+SCRIPT(`https://cdn.rawgit.com/mishalindetak/unbroken/dfd0a2ca68d147383ebfbc0127b96083718fa491/ie10fix.js',		`sha384-Upxx4F1UKNh6OVGGabosYhbzAN3hDcsETf4eziClbBLJwG+tgzraP7Qe8Se1M6UP')
 SCRIPT(`https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js',				`sha384-2aVpK/uKiYlyFXHZ36wvxOPZyWeouEKvbSUlqCrkFhyT80n2aSYtT15Tgdn6g41M')
 SCRIPT(`https://cdn.rawgit.com/lightbox/jquery-keynav/b73a9c597315f4cec9b54a0889f3de01c58ee21f/jquery.keynav.js',	`sha384-ppIdM2QljKNY0HjGVJTSOQT5/72E5I67qHym+ZJhhkqX0RZfegzYf5JplBbHGZU+')
 SCRIPT(`https://cdn.rawgit.com/mishalindetak/unbroken/aa5459d0ab9286486f6d744f2998b9ce58eee42b/responsive.js',		`sha384-karCNJRpJOxkP1mf19CQEMZ445UWJsdZCh8EfOaC0hAmpXNmu700X85/NcHk+G5w')
-
-<script type="text/javascript">
-// Previous/next page navigation
-$(document).keydown(function(e){
-  if (e.target && e.target.tagName == 'TEXTAREA' || e.target.tagName == 'INPUT') {
-    return true;
-  }
-  switch(e.keyCode) {
-    case 72: case 80: $('#prevpage')[0].click(); break;
-    case 76: case 78: $('#nextpage')[0].click(); break;
-  }
-});
-
-$(document).ready(function() {
-
-  // Trigger resizing of videos
-  $(window).resize();
-
-  // Enable j/k scrolling
-  $('.post').keynav();
-
-  // Enable lightbox
-  $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-      event.preventDefault();
-      $(this).ekkoLightbox();
-  });
-
-  // Bootstrap fix for IE10
-  // Copyright (c) 2014-2015 Twitter, Inc.
-  // MIT license
-  if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-    var msViewportStyle = document.createElement('style')
-    msViewportStyle.appendChild(
-      document.createTextNode(
-        '@-ms-viewport{width:auto!important}'
-      )
-    )
-    document.querySelector('head').appendChild(msViewportStyle)
-}
-
-});
-
-</script>
+SCRIPT(`https://cdn.rawgit.com/mishalindetak/unbroken/ac81b5b2a776b16f292c840668fb79cf090d4f96/unbroken.js',		`sha384-w5UtbJaGJkMrhlynIMUco/utuCzK7znIRqi9gU+noyJbcRdMsD7fMxm/esppPDZj')
 
 </body>
 </html>
