@@ -100,6 +100,12 @@ BLOCK(`ifBlackButtons', `.buttons a:link, .buttons a:visited, .buttons a:hover, 
 
 .post pre { white-space: pre-wrap; }
 
+blockquote { font-size: inherit; }
+
+.Quote blockquote { font-size: 1.5em; font-style: oblique; }
+
+.Quote blockquote footer { font-style: normal; }
+
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
 
 .buttons { margin-bottom: 3em; }
@@ -113,9 +119,6 @@ li.note, li.note blockquote { margin-top: 0.5em; }
 .date { text-align: left; }
 .buttons { text-align: right; }
 }
-
-blockquote { font-size: inherit; }
-.Quote blockquote { font-size: 1.5em; }
 
 /* Custom CSS */
 {CustomCSS}
