@@ -367,6 +367,7 @@ SCRIPT(`https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js',					
 SCRIPT(`https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',						`sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS')
 SCRIPT(`https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js',				`sha384-2aVpK/uKiYlyFXHZ36wvxOPZyWeouEKvbSUlqCrkFhyT80n2aSYtT15Tgdn6g41M')
 SCRIPT(`https://cdn.rawgit.com/lightbox/jquery-keynav/b73a9c597315f4cec9b54a0889f3de01c58ee21f/jquery.keynav.js',	`sha384-ppIdM2QljKNY0HjGVJTSOQT5/72E5I67qHym+ZJhhkqX0RZfegzYf5JplBbHGZU+')
+SCRIPT(`https://cdn.rawgit.com/mishalindetak/unbroken/aa5459d0ab9286486f6d744f2998b9ce58eee42b/responsive.js',		`sha384-karCNJRpJOxkP1mf19CQEMZ445UWJsdZCh8EfOaC0hAmpXNmu700X85/NcHk+G5w')
 
 <script type="text/javascript">
 // Previous/next page navigation
@@ -380,39 +381,6 @@ $(document).keydown(function(e){
   }
 });
 
-// responsive videos
-// Copyright (c) 2014 S. William Get-Blogging.com https://www.html5andbeyond.com/tumblr-responsive-videos-jquery/
-// MIT license
-// All bugs added by Misha Lindetak
-$(window).resize(function(){
-
-  var max = 0.75 * (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight);
-
-  $('.tumblr_video_container').each(function(){
-    var scaleRatio = $(this).children('.tumblr_video_iframe').attr('data-width') / $(this).children('.tumblr_video_iframe').attr('data-height');
-    $(this).add($(this).children('.tumblr_video_iframe')).css('width', '100%');
-    var height = $(this).children('.tumblr_video_iframe').width() / scaleRatio;
-    if (height > max) {
-      height = max;
-      $(this).add($(this).children('.tumblr_video_iframe')).css('width', height * scaleRatio);
-    }
-    $(this).add($(this).children('.tumblr_video_iframe')).css('height', height)
-  });
-
-  $('iframe[src*="youtube.com"], iframe[src*="vimeo.com"], iframe[src*="dailymotion.com"]').each(function(){
-    var scaleRatio = $(this).prop('width') / $(this).prop('height');
-    $(this).css('width','100%');
-    var height = $(this).width() / scaleRatio;
-    if (height > max) {
-      height = max;
-      $(this).css('width', height * scaleRatio);
-    }
-    $(this).css('height', height);
- 
-  });
- 
-});
- 
 $(document).ready(function() {
 
   // Trigger resizing of videos
