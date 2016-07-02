@@ -86,29 +86,23 @@ STYLE(`https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.c
 
 /* Theme CSS */
 BLOCK(`IfChangeBodyFont', `body { font-family: {font:Body};} ')
-
 BLOCK(`IfChangeTitleFont', `h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: {font:Title}; }')
-
-.header {
-BLOCK(`ShowHeaderImage', `background-image: url("{HeaderImage}");')
-BLOCK(`IfChangeTitleColor', `color: {TitleColor};')
-}
+BLOCK(`ShowHeaderImage', `.header { background-image: url("{HeaderImage}"); }')
+BLOCK(`IfChangeTitleColor', `.header { color: {TitleColor}; }')
+BLOCK(`IndexPage', `.panel-body { max-height: 80vh; overflow: auto; }')
+BLOCK(`ifGreyButtons', `.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: #cccccc; }')
+BLOCK(`ifWhiteButtons', `.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: white; }')
+BLOCK(`ifBlackButtons', `.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: black; }')
 
 .photo { margin: auto; }
 
 .post img { width: auto; height: auto; max-width: 100%; max-height: 75vh; }
 
-BLOCK(`IndexPage', `.panel-body { max-height: 80vh; overflow: auto; }')
+.post pre { white-space: pre-wrap; }
 
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
 
-.metainfo { margin-bottom: 3em; }
-
-.metainfo a:link, .metainfo a:visited, .metainfo a:hover, .metainfo a:active {
-BLOCK(`ifGreyButtons', `color: #cccccc;')
-BLOCK(`ifWhiteButtons', `color: white;')
-BLOCK(`ifBlackButtons', `color: black;')
-}
+.buttons { margin-bottom: 3em; }
 
 ol.notes { list-style-type: none; }
 
@@ -117,7 +111,7 @@ li.note, li.note blockquote { margin-top: 0.5em; }
 @media (max-width: 991px) {
 .reblog_button, .like_button { display: inline-block !important; margin-top: 0; margin-bottom: 0; }
 .date { text-align: left; }
-.metainfo { text-align: right; }
+.buttons { text-align: right; }
 }
 
 blockquote { font-size: inherit; }
@@ -175,7 +169,7 @@ define(`CONTENT',
       ` DIV(`panel panel-default',
         ` PIC(`Photo', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox">', `</a>')
           PIC(`Panorama', `{LinkOpenTag}', `{LinkCloseTag}')
-          POST(`Photoset',` {PhotoCount} Photos', `DIV(`text-center', `BLOCK(`Photos', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')>PHOTO</a><br><br>')')
+          POST(`Photoset',` {PhotoCount} images', `DIV(`text-center', `BLOCK(`Photos', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"BLOCK(`Caption',` data-title="{PlaintextCaption}" title="{PlaintextCaption}"')>PHOTO</a><br><br>')')
             BLOCK(`Caption', `{Caption}')
           ')
           POST(`Text',,`{Body}')
@@ -208,9 +202,9 @@ define(`CONTENT',
       ')
       DIV(`col-md-1',
       ` BLOCK(`Date',
-        ` DIV(`metainfo',
+        ` DIV(`buttons',
           ` BCOLOR(`White',`white')BCOLOR(`Grey',`grey')BCOLOR(`Black',`black')
-            <a href="{Permalink}"><span class="fa fa-link fa-lg" aria-hidden="true"></span><span class="sr-only">permalink</span></a>$1<br>
+            BLOCK(`IndexPage', `<a href="{Permalink}"><span class="fa fa-link fa-lg" aria-hidden="true"></span><span class="sr-only">permalink</span></a>$1<br>')
           ')
         ')
       ')

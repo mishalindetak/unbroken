@@ -75,26 +75,23 @@
 /* Theme CSS */
 {block:IfChangeBodyFont}body { font-family: {font:Body};} {/block:IfChangeBodyFont}
 {block:IfChangeTitleFont}h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: {font:Title}; }{/block:IfChangeTitleFont}
-.header {
-{block:ShowHeaderImage}background-image: url("{HeaderImage}");{/block:ShowHeaderImage}
-{block:IfChangeTitleColor}color: {TitleColor};{/block:IfChangeTitleColor}
-}
+{block:ShowHeaderImage}.header { background-image: url("{HeaderImage}"); }{/block:ShowHeaderImage}
+{block:IfChangeTitleColor}.header { color: {TitleColor}; }{/block:IfChangeTitleColor}
+{block:IndexPage}.panel-body { max-height: 80vh; overflow: auto; }{/block:IndexPage}
+{block:ifGreyButtons}.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: #cccccc; }{/block:ifGreyButtons}
+{block:ifWhiteButtons}.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: white; }{/block:ifWhiteButtons}
+{block:ifBlackButtons}.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: black; }{/block:ifBlackButtons}
 .photo { margin: auto; }
 .post img { width: auto; height: auto; max-width: 100%; max-height: 75vh; }
-{block:IndexPage}.panel-body { max-height: 80vh; overflow: auto; }{/block:IndexPage}
+.post pre { white-space: pre-wrap; }
 .reblog_button { margin-top: 1em; margin-bottom: 6px; }
-.metainfo { margin-bottom: 3em; }
-.metainfo a:link, .metainfo a:visited, .metainfo a:hover, .metainfo a:active {
-{block:ifGreyButtons}color: #cccccc;{/block:ifGreyButtons}
-{block:ifWhiteButtons}color: white;{/block:ifWhiteButtons}
-{block:ifBlackButtons}color: black;{/block:ifBlackButtons}
-}
+.buttons { margin-bottom: 3em; }
 ol.notes { list-style-type: none; }
 li.note, li.note blockquote { margin-top: 0.5em; }
 @media (max-width: 991px) {
 .reblog_button, .like_button { display: inline-block !important; margin-top: 0; margin-bottom: 0; }
 .date { text-align: left; }
-.metainfo { text-align: right; }
+.buttons { text-align: right; }
 }
 blockquote { font-size: inherit; }
 .Quote blockquote { font-size: 1.5em; }
@@ -164,8 +161,8 @@ blockquote { font-size: inherit; }
 </div>
 {block:PostNotes}<div id="notes">{PostNotes}</div>{/block:PostNotes}
 </div>
-<div class="col-md-1"> {block:Date} <div class="metainfo"> {block:ifWhiteButtons}{ReblogButton size="18" color="white"} {LikeButton size="18" color="white"}{/block:ifWhiteButtons}{block:ifGreyButtons}{ReblogButton size="18" color="grey"} {LikeButton size="18" color="grey"}{/block:ifGreyButtons}{block:ifBlackButtons}{ReblogButton size="18" color="black"} {LikeButton size="18" color="black"}{/block:ifBlackButtons}
-<a href="{Permalink}"><span class="fa fa-link fa-lg" aria-hidden="true"></span><span class="sr-only">permalink</span></a><br>
+<div class="col-md-1"> {block:Date} <div class="buttons"> {block:ifWhiteButtons}{ReblogButton size="18" color="white"} {LikeButton size="18" color="white"}{/block:ifWhiteButtons}{block:ifGreyButtons}{ReblogButton size="18" color="grey"} {LikeButton size="18" color="grey"}{/block:ifGreyButtons}{block:ifBlackButtons}{ReblogButton size="18" color="black"} {LikeButton size="18" color="black"}{/block:ifBlackButtons}
+{block:IndexPage}<a href="{Permalink}"><span class="fa fa-link fa-lg" aria-hidden="true"></span><span class="sr-only">permalink</span></a><br>{/block:IndexPage}
 </div>
 {/block:Date}
 </div>
