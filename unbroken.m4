@@ -363,9 +363,10 @@ THE SOFTWARE.</tt></small>
 
 define(`SCRIPT', `<script src="$1" integrity="$2" crossorigin="anonymous"></script>')
 
-SCRIPT(`https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js',			`sha384-6ePHh72Rl3hKio4HiJ841psfsRJveeS+aLoaEf3BWfS+gTF0XdAqku2ka8VddikM')
-SCRIPT(`https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',			`sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS')
-SCRIPT(`https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js',	`sha384-2aVpK/uKiYlyFXHZ36wvxOPZyWeouEKvbSUlqCrkFhyT80n2aSYtT15Tgdn6g41M')
+SCRIPT(`https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js',						`sha384-6ePHh72Rl3hKio4HiJ841psfsRJveeS+aLoaEf3BWfS+gTF0XdAqku2ka8VddikM')
+SCRIPT(`https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js',						`sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS')
+SCRIPT(`https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js',				`sha384-2aVpK/uKiYlyFXHZ36wvxOPZyWeouEKvbSUlqCrkFhyT80n2aSYtT15Tgdn6g41M')
+SCRIPT(`https://cdn.rawgit.com/lightbox/jquery-keynav/b73a9c597315f4cec9b54a0889f3de01c58ee21f/jquery.keynav.js',	`sha384-ppIdM2QljKNY0HjGVJTSOQT5/72E5I67qHym+ZJhhkqX0RZfegzYf5JplBbHGZU+')
 
 <script type="text/javascript">
 // Previous/next page navigation
@@ -412,69 +413,6 @@ $(window).resize(function(){
  
 });
  
-
-// j/k scrolling
-// Copyright (c) 2012 https://github.com/lightbox/jquery-keynav
-// MIT license
-$.fn.keynav = (function () {
-	//a couple of global things for the plugin
-	var nodes = $(), moving = false, positions = [], recalculate_positions, params;
-	params = {
-		speed: 150,
-		scrolltreshold: 60,
-		keynext: 74,
-		keyprev: 75
-	};
-	//we're watching keypresses globally as well.
-	$(document).keydown(function(e) {
-		var st, prev, next, desired, i;
-		if (!nodes.length) {return true;}
-		if (moving) {return true;}
-		if (e.target && e.target.tagName == 'TEXTAREA' || e.target.tagName == 'INPUT') {
-			return true;
-		}
-		if(e.keyCode == params.keynext || e.keyCode == params.keyprev) {
-			st = $(window).scrollTop();
-			//we're checking if our positions are still correct. it may not be necessary all the time, but just to be safe
-			if(positions[positions.length-1].top !== $(positions[positions.length-1].obj).offset().top) {
-				recalculate_positions();
-			}
-			
-			if(e.keyCode === params.keynext) {
-				for(i = 0; i < positions.length; i++) {
-					if(positions[i].top > st + 1) {desired = i; break;}
-				}
-			} else if(e.keyCode === params.keyprev) {
-				for(i = 0; i < positions.length; i++) {
-					if(positions[i].top < st - 1) {desired = i;}
-				}
-			}
-			moving = true;
-			if(positions[desired]) {
-				$('html,body').animate({'scrollTop': positions[desired].top}, Math.abs(positions[desired].top - st) > params.scrolltreshold ? params.speed : 0, function() {moving = false;});
-			} else {
-				$('html,body').animate({'scrollTop': (e.keyCode === params.keynext ? ($('body').height() - $(window).height()) : 0)}, params.speed,	 function() {moving = false;});
-			}
-		}
-	});
-	
-	recalculate_positions = function () {
-		//this recalculates the positions of nodes
-		positions = [];
-		nodes.each(function() {
-			positions.push({top: Math.floor($(this).offset().top),obj: this});
-		});
-	};
-	
-	return function(newparams) {
-		//all we do in the actual plugin is we take the parameters and add the new nodes where we want to navigate.
-		params = $.extend(params,newparams || {});
-		nodes = nodes.add(this);
-		recalculate_positions();
-	};
-	
-})();
-
 $(document).ready(function() {
 
   // Trigger resizing of videos
