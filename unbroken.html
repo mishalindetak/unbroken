@@ -103,48 +103,59 @@ blockquote { font-size: inherit; }
 </style>
 </head>
 <body>
-<div class="header jumbotron"> <div class="container"> <h1><a href="{BlogURL}">{Title}</a></h1>
+<div class="header jumbotron"> <div class="container"> <h1 id="top"><a href="{BlogURL}">{Title}</a></h1>
 {block:ShowDescription}<p>{Description}</p>{/block:ShowDescription}
 </div>
 </div>
-<div class="container-fluid" id="top">
-<div class="row"> <div class="col-md-9"> {block:Posts} <div class="row"> <div class="col-md-3 text-right date"> {block:Date} {block:NewDayDate} <h2><a href="{BlogURL}day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">{Month} {DayOfMonth}{DayOfMonthSuffix}</a><br>
+<div class="container-fluid"> <div class="row"> <div class="col-md-9"> {block:Posts} <div class="row"> <div class="col-md-3 text-right date"> {block:Date} {block:NewDayDate} <h2><a href="{BlogURL}day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">{Month} {DayOfMonth}{DayOfMonthSuffix}</a><br>
 <small>({TimeAgo})</small></h2>
 {/block:NewDayDate}
 {/block:Date}
 </div>
 <div class="col-md-8 post"> <div class="panel panel-default"> {block:Photo} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body Photo"><div class="text-center"><a href="{PhotoURL-HighRes}" data-toggle="lightbox"><img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w, {PhotoURL-500} 500w, {PhotoURL-400} 400w, {PhotoURL-250} 250w, {PhotoURL-100} 100w" alt="{PhotoAlt}"></a></div>
-{block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Photo}
+{block:Caption}<br>{Caption}{/block:Caption}
+</div>
+{/block:Photo}
 {block:Panorama} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body Panorama"><div class="text-center">{LinkOpenTag}<img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w, {PhotoURL-500} 500w, {PhotoURL-400} 400w, {PhotoURL-250} 250w, {PhotoURL-100} 100w" alt="{PhotoAlt}">{LinkCloseTag}</div>
-{block:Caption}<br>{Caption}{/block:Caption}</div>{/block:Panorama}
-{block:Photoset} <div class="panel-heading"><h3 class="panel-title">{PhotoCount} Photos</h3></div>
+{block:Caption}<br>{Caption}{/block:Caption}
+</div>
+{/block:Panorama}
+{block:Photoset} <div class="panel-heading"><h3 class="panel-title">Photoset</h3></div>
 <div class="panel-body Photoset"><div class="text-center">{block:Photos}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w, {PhotoURL-500} 500w, {PhotoURL-400} 400w, {PhotoURL-250} 250w, {PhotoURL-100} 100w" alt="{PhotoAlt}"></a><br><br>{/block:Photos}</div>
 {block:Caption}{Caption}{/block:Caption}
-</div>{/block:Photoset}
+</div>
+{/block:Photoset}
 {block:Text} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body Text">{Body}</div>{/block:Text}
+<div class="panel-body Text">{Body}</div>
+{/block:Text}
 {block:Quote} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body Quote"><blockquote><p>{Quote}</p>{block:Source}<footer>{Source}</footer>{/block:Source}</blockquote></div>{/block:Quote}
-{block:Link} <div class="panel-heading"><h3 class="panel-title"><a href="{URL}" {Target}><u>{block:Author}{Author}: {/block:Author}{Name}</u></a></h3></div>
+<div class="panel-body Quote"><blockquote><p>{Quote}</p>{block:Source}<footer>{Source}</footer>{/block:Source}</blockquote></div>
+{/block:Quote}
+{block:Link} <div class="panel-heading"><h3 class="panel-title">Link</h3></div>
 <div class="panel-body Link">{block:Excerpt}<blockquote><p>{Excerpt}</p></blockquote>{/block:Excerpt}
 {block:Description}{Description}{/block:Description}
-</div>{/block:Link}
+</div>
+{/block:Link}
 {block:Chat} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body Chat">{block:Lines}{block:Label}<b>{Label}</b>{/block:Label} {Line}<br>{/block:Lines}</div>{/block:Chat}
+<div class="panel-body Chat">{block:Lines}{block:Label}<b>{Label}</b>{/block:Label} {Line}<br>{/block:Lines}</div>
+{/block:Chat}
 {block:Video} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
-<div class="panel-body Video">{Video-500}{block:Caption}<p><br>{Caption}</p>{/block:Caption}</div>{/block:Video}
-{block:Audio} <div class="panel-heading"><h3 class="panel-title">{block:Artist}{Artist}{block:TrackName}: {/block:TrackName}{/block:Artist}{block:TrackName}{TrackName}{/block:TrackName}</h3></div>
+<div class="panel-body Video">{Video-500}{block:Caption}<p><br>{Caption}</p>{/block:Caption}</div>
+{/block:Video}
+{block:Audio} <div class="panel-heading"><h3 class="panel-title">Audio</h3></div>
 <div class="panel-body Audio">{block:AudioEmbed}{AudioEmbed-250}{/block:AudioEmbed}
 {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
 {block:Caption}<p><br>{Caption}</p>{/block:Caption}
-</div>{/block:Audio}
+</div>
+{/block:Audio}
 {block:Answer} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body Answer"><div class="text-right">{Asker} asked: <blockquote class="blockquote-reverse"><p>{Question}</p></blockquote></div>
 {block:Answerer}{Answerer} replied: <blockquote>{Answer}</blockquote>{/block:Answerer}
 {Replies}
-</div>{/block:Answer}
+</div>
+{/block:Answer}
 {block:Date} <div class="panel-footer"> <span class="fa fa-comments-o" aria-hidden="true"></span> <small><a href="{Permalink}#notes">{NoteCountWithLabel}</a></small>
 {block:HasTags}&nbsp;<span class="fa fa-tags" aria-hidden="true"></span> <small>{block:Tags}<a href="{TagURL}">#{Tag}</a> {/block:Tags}</small>{/block:HasTags}
 {block:ContentSource}&nbsp;<span class="fa fa-external-link" aria-hidden="true"></span> <small><a href="{SourceURL}">{SourceTitle}</a></small>{/block:ContentSource}
@@ -161,10 +172,10 @@ blockquote { font-size: inherit; }
 </div>
 {/block:Posts}
 </div>
-<div class="col-md-3"> {block:ifUsePortrait} <div class="thumbnail"> <img src="{image:Portrait}" alt="author portrait">
+<div class="col-md-3"> {block:IfPortrait} <div class="thumbnail"> <img src="{image:Portrait}" alt="author portrait">
 {block:IfPortraitCaption}<div class="caption">{text:Portrait Caption}</div>{/block:IfPortraitCaption}
 </div>
-{/block:ifUsePortrait}
+{/block:IfPortrait}
 <form action="{BlogURL}search" method="get" role="search">
 <div class="input-group"> <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
 <span class="input-group-btn"><button class="btn btn-default" type="submit"><span class="fa fa-search" aria-hidden="true"></span><span class="sr-only">Submit</span></button></span>

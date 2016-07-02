@@ -135,54 +135,42 @@ define(`DIV', `<div class="$1">$2</div>')
 
 define(`FA', `<span class="fa fa-$1" aria-hidden="true"></span>')
 
-define(`JUMBOTRON',
-` DIV(`header jumbotron',
-  ` DIV(`container',
-    ` <h1><a href="{BlogURL}">{Title}</a></h1>
-      BLOCK(`ShowDescription', `<p>{Description}</p>')
-    ')
-  ')
-')
-
-define(`DATE',
-` DIV(`col-md-3 text-right date',
-  ` BLOCK(`Date',
-    ` BLOCK(`NewDayDate',
-      ` <h2><a href="{BlogURL}day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">{Month} {DayOfMonth}{DayOfMonthSuffix}</a><br>
-        <small>({TimeAgo})</small></h2>
-      ')
-    ')
-  ')
-')
-
+dnl size for reblog and like buttons
 define(`BSIZE', `18')
 
-dnl figuring out how to capitalize (or if we even need to) is more effort than it's worth
+dnl figuring out how to capitalize white/grey/black (or if we even need to) is more effort than it's worth
 define(`BCOLOR', `BLOCK(`if$1Buttons', `{ReblogButton size="BSIZE" color="$2"} {LikeButton size="BSIZE" color="$2"}')')
 
-define(`TITLE',
-` ifelse($1,,
-  ` BLOCK(`Title', `DIV(`panel-heading',`<h3 class="panel-title">{Title}</h3>')')',
-  ` DIV(`panel-heading', `<h3 class="panel-title">$1</h3>')'
-  )
+define(`POST',
+` BLOCK(`$1',
+  ` ifelse($2,,
+    ` BLOCK(`Title', `DIV(`panel-heading',`<h3 class="panel-title">{Title}</h3>')')',
+    ` DIV(`panel-heading', `<h3 class="panel-title">$1</h3>')'
+    )
+    DIV(`panel-body $1',$3)
+  ')
 ')
-
-define(`POST',`BLOCK(`$1',`TITLE($2)DIV(`panel-body $1',$3)')')
 
 define(`PHOTO', `<img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w`,' {PhotoURL-500} 500w`,' {PhotoURL-400} 400w`,' {PhotoURL-250} 250w`,' {PhotoURL-100} 100w" alt="{PhotoAlt}">')
 
 define(`PIC',
 ` POST($1,,
   ` DIV(`text-center', `$2PHOTO$3')
-    BLOCK(`Caption', `<br>{Caption}')',
-  ` <a href="{PhotoUrl-HighRes}">FA(`save')<span class="sr-only">save</span></a>
+    BLOCK(`Caption', `<br>{Caption}')
   ')
 ')
 
 define(`CONTENT',
 ` BLOCK(`Posts',
   ` DIV(`row',
-    ` DATE
+    ` DIV(`col-md-3 text-right date',
+      ` BLOCK(`Date',
+        ` BLOCK(`NewDayDate',
+          ` <h2><a href="{BlogURL}day/{Year}/{MonthNumberWithZero}/{DayOfMonthWithZero}">{Month} {DayOfMonth}{DayOfMonthSuffix}</a><br>
+            <small>({TimeAgo})</small></h2>
+          ')
+        ')
+      ')
       DIV(`col-md-8 post',
       ` DIV(`panel panel-default',
         ` PIC(`Photo', `<a href="{PhotoURL-HighRes}" data-toggle="lightbox">', `</a>')
@@ -230,17 +218,14 @@ define(`CONTENT',
   ')
 ')
 
-define(`PORTRAIT',
-` BLOCK(`ifUsePortrait',
+define(`SIDEBAR',
+` BLOCK(`IfPortrait',
   ` DIV(`thumbnail',
     ` <img src="{image:Portrait}" alt="author portrait">
       BLOCK(`IfPortraitCaption', `DIV(`caption', `{text:Portrait Caption}')')
     ')
   ')
-')
-
-define(`SIDENAV',
-` <form action="{BlogURL}search" method="get" role="search">
+  <form action="{BlogURL}search" method="get" role="search">
   DIV(`input-group',
   ` <input type="text" class="form-control" placeholder="Search..." title="Search" name="q" value="{SearchQuery}">
     <span class="input-group-btn"><button class="btn btn-default" type="submit">FA(`search')<span class="sr-only">Submit</span></button></span>
@@ -266,12 +251,17 @@ define(`SIDENAV',
 
 dnl actual page starts here
 
-JUMBOTRON
+DIV(`header jumbotron',
+` DIV(`container',
+  ` <h1 id="top"><a href="{BlogURL}">{Title}</a></h1>
+    BLOCK(`ShowDescription', `<p>{Description}</p>')
+  ')
+')
 
-<div class="container-fluid" id="top">
-  DIV(`row',
+DIV(`container-fluid',
+` DIV(`row',
   ` DIV(`col-md-9',`CONTENT')
-    DIV(`col-md-3',`PORTRAIT SIDENAV')
+    DIV(`col-md-3',`SIDEBAR')
   ')
 
   DIV(`row',
@@ -301,7 +291,7 @@ JUMBOTRON
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#copyrights"><span class="fa fa-copyright" aria-hidden="true"></span><span class="sr-only">copyright information</span></button>
     ')
   ')
-</div>
+')
 
 <div class="modal fade" id="copyrights" tabindex="-1" role="dialog" aria-labelledby="copyrightsLabel">
   <div class="modal-dialog" role="document">
