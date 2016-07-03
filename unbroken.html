@@ -75,8 +75,8 @@
 /* Theme CSS */
 {block:IfChangeBodyFont}body { font-family: {font:Body};} {/block:IfChangeBodyFont}
 {block:IfChangeTitleFont}h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: {font:Title}; }{/block:IfChangeTitleFont}
-{block:ShowHeaderImage}.header { background-image: url("{HeaderImage}"); }{/block:ShowHeaderImage}
-{block:IfChangeTitleColor}.header { color: {TitleColor}; }{/block:IfChangeTitleColor}
+{block:ShowHeaderImage}.header { background-image: url({HeaderImage}); background-size: cover; background-position: center; }{/block:ShowHeaderImage}
+{block:IfChangeTitleColor}.header, .header a:link, .header a:visited, .header a:hover, .header a:active { color: {TitleColor}; }{/block:IfChangeTitleColor}
 {block:IndexPage}.panel-body { max-height: 80vh; overflow: auto; }{/block:IndexPage}
 {block:ifGreyButtons}.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: #cccccc; }{/block:ifGreyButtons}
 {block:ifWhiteButtons}.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: white; }{/block:ifWhiteButtons}

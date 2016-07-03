@@ -87,8 +87,8 @@ STYLE(`https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.c
 /* Theme CSS */
 BLOCK(`IfChangeBodyFont', `body { font-family: {font:Body};} ')
 BLOCK(`IfChangeTitleFont', `h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { font-family: {font:Title}; }')
-BLOCK(`ShowHeaderImage', `.header { background-image: url("{HeaderImage}"); }')
-BLOCK(`IfChangeTitleColor', `.header { color: {TitleColor}; }')
+BLOCK(`ShowHeaderImage', `.header { background-image: url({HeaderImage}); background-size: cover; background-position: center; }')
+BLOCK(`IfChangeTitleColor', `.header, .header a:link, .header a:visited, .header a:hover, .header a:active { color: {TitleColor}; }')
 BLOCK(`IndexPage', `.panel-body { max-height: 80vh; overflow: auto; }')
 BLOCK(`ifGreyButtons', `.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: #cccccc; }')
 BLOCK(`ifWhiteButtons', `.buttons a:link, .buttons a:visited, .buttons a:hover, .buttons a:active { color: white; }')
