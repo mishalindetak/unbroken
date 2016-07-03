@@ -120,7 +120,7 @@ li.note, li.note blockquote { margin-top: 0.5em; }
 {block:Caption}<br>{Caption}{/block:Caption}
 </div>
 {/block:Panorama}
-{block:Photoset} <div class="panel-heading"><h3 class="panel-title">Photoset</h3></div>
+{block:Photoset} <div class="panel-heading"><h3 class="panel-title"> {PhotoCount} images</h3></div>
 <div class="panel-body Photoset"><div class="text-center">{block:Photos}<a href="{PhotoURL-HighRes}" data-toggle="lightbox" data-gallery="{PostID}"{block:Caption} data-title="{PlaintextCaption}" title="{PlaintextCaption}"{/block:Caption}><img class="photo" src="{PhotoURL-500}" srcset="{PhotoURL-HighRes} 540w, {PhotoURL-500} 500w, {PhotoURL-400} 400w, {PhotoURL-250} 250w, {PhotoURL-100} 100w" alt="{PhotoAlt}"></a><br><br>{/block:Photos}</div>
 {block:Caption}{Caption}{/block:Caption}
 </div>
@@ -131,7 +131,7 @@ li.note, li.note blockquote { margin-top: 0.5em; }
 {block:Quote} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body Quote"><blockquote><p>{Quote}</p>{block:Source}<footer>{Source}</footer>{/block:Source}</blockquote></div>
 {/block:Quote}
-{block:Link} <div class="panel-heading"><h3 class="panel-title">Link</h3></div>
+{block:Link} <div class="panel-heading"><h3 class="panel-title"> <a href="{URL}" {Target}><u>{block:Author}{Author}: {/block:Author}{Name}</u></a></h3></div>
 <div class="panel-body Link">{block:Excerpt}<blockquote><p>{Excerpt}</p></blockquote>{/block:Excerpt}
 {block:Description}{Description}{/block:Description}
 </div>
@@ -142,7 +142,7 @@ li.note, li.note blockquote { margin-top: 0.5em; }
 {block:Video} {block:Title}<div class="panel-heading"><h3 class="panel-title">{Title}</h3></div>{/block:Title}
 <div class="panel-body Video">{Video-500}{block:Caption}<p><br>{Caption}</p>{/block:Caption}</div>
 {/block:Video}
-{block:Audio} <div class="panel-heading"><h3 class="panel-title">Audio</h3></div>
+{block:Audio} <div class="panel-heading"><h3 class="panel-title"> {block:Artist}{Artist}{block:TrackName}: {/block:TrackName}{/block:Artist}{block:TrackName}{TrackName}{/block:TrackName}</h3></div>
 <div class="panel-body Audio">{block:AudioEmbed}{AudioEmbed-250}{/block:AudioEmbed}
 {block:AudioPlayer}{AudioPlayer}{/block:AudioPlayer}
 {block:Caption}<p><br>{Caption}</p>{/block:Caption}

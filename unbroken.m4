@@ -142,7 +142,7 @@ define(`POST',
 ` BLOCK(`$1',
   ` ifelse($2,,
     ` BLOCK(`Title', `DIV(`panel-heading',`<h3 class="panel-title">{Title}</h3>')')',
-    ` DIV(`panel-heading', `<h3 class="panel-title">$1</h3>')'
+    ` DIV(`panel-heading', `<h3 class="panel-title">$2</h3>')'
     )
     DIV(`panel-body $1',$3)
   ')
